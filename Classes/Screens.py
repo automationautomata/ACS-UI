@@ -30,9 +30,9 @@ test = {'data': [{'card': '15',
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        self.ids.entities_table.load_data(entities_db, test)
+        self.ids.entities_table.load_data(app.requsts_controller.get_table(table='entities_view', start=0, sorting_rules={}))
         self.ids.entities_header.load_data()
-        self.ids.access_rules_table.load_data(rules_db, {'data': [], 'error': ''})
+        self.ids.access_rules_table.load_data(app.requsts_controller.get_table(table='access_rules_view', start=0, sorting_rules={}))
         self.ids.access_rules_header.load_data()
 
     def _update(self):
@@ -64,7 +64,6 @@ class RulesScreen(Screen):
 
 class LogsScreen(Screen):
     pass
-
 
 
 class Footer(Widget):

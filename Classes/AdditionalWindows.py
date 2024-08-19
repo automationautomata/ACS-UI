@@ -68,81 +68,159 @@ class SortingWindow(Popup):
     def __init__(self, **kwargs):
         super(SortingWindow, self).__init__(**kwargs)
 
-    def open_win(self):
+    def open_win(self, entity):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
-        self.open()
-
-class AddRecordWindow(Popup):
-    _result = {}
-
-    def __init__(self, **kwargs):
-        super(AddRecordWindow, self).__init__(**kwargs)
-
-    def open_win(self):
-        self.background_color = app.themes[app.current_theme]['Additionally'][2]
-        self.separator_color = app.themes[app.current_theme]['Base'][0]
+        self._entity = entity
 
         self.open()
 
     def on_open(self):
-        self.add_menu(self)
+        self.sorting_menu()
 
-    def add_menu(self, instance):
+    def sorting_menu(self):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
-        if app.root.ids.screen_manager.current == 'entities':
-            self._result['add_card_button'] = Button(text='Add card',
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                pos=(self.width / 2 - 85, 225),
-                size_hint=(None, None),
-                size=(150, 50),
-                on_release=self.add_card)
-            self._result['linking_card_button'] = Button(text='Linking card',
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                pos=(self.width / 2 - 85, 125),
-                size_hint=(None, None),
-                size=(150, 50),
-                on_release=self.linking_card)
+        if self._entity == 'card':
+            self.sorting_card()
+        elif self._entity == 'room':
+            self.sorting_room()
+        elif self._entity == 'right':
+            self.sorting_right()
+        elif self._entity == 'link':
+            self.sorting_link()
+        elif self._entity == 'rule':
+            self.sorting_rule()
+        elif self._entity == 'logs':
+            self.sorting_logs()
 
-        elif app.root.ids.screen_manager.current == 'rules':
-            self._result['add_room_button'] = Button(text='Add room',
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                pos=(self.width / 2 - 85, 275),
-                size_hint=(None, None),
-                size=(150, 50),
-                on_release=self.add_room)
-            self._result['add_right_button'] = Button(text='Add right',
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                pos=(self.width / 2 - 85, 175),
-                size_hint=(None, None),
-                size=(150, 50),
-                on_release=self.add_right)
-            self._result['add_rule_button'] = Button(text='Add rule',
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                pos=(self.width / 2 - 85, 75),
-                size_hint=(None, None),
-                size=(150, 50),
-                on_release=self.add_rule)
+    def sorting_card(self):
+        pass
 
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 130, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
+    def sorting_room(self):
+        pass
 
-        for el in self._result.values():
-            self.ids.main_area.add_widget(el)
+    def sorting_right(self):
+        pass
 
-    def add_card(self, instance):
+    def sorting_link(self):
+        pass
+
+    def sorting_rule(self):
+        pass
+
+    def sorting_logs(self):
+        pass
+
+    def confirm_dismiss(self, instance, type):
+        res = {}
+        if type == 'card':
+            # Запрос: проверка существования карты в бд
+            res['number'] = self._result['card_result'].text
+        print(res)
+        print('Confirm')
+        self.dismiss()
+
+    def cancel_dismiss(self, instance):
+        print('Cancel')
+        self.dismiss()
+
+class FindWindow(Popup):
+    def __init__(self, **kwargs):
+        super(FindWindow, self).__init__(**kwargs)
+
+    def open_win(self, entity):
+        self.background_color = app.themes[app.current_theme]['Additionally'][2]
+        self.separator_color = app.themes[app.current_theme]['Base'][0]
+        self._entity = entity
+
+        self.open()
+
+    def on_open(self):
+        self.find_menu()
+
+    def find_menu(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        if self._entity == 'card':
+            self.find_card()
+        elif self._entity == 'room':
+            self.find_room()
+        elif self._entity == 'right':
+            self.find_right()
+        elif self._entity == 'link':
+            self.find_link()
+        elif self._entity == 'rule':
+            self.find_rule()
+        elif self._entity == 'logs':
+            self.find_logs()
+
+    def find_card(self):
+        pass
+
+    def find_room(self):
+        pass
+
+    def find_right(self):
+        pass
+
+    def find_link(self):
+        pass
+
+    def find_rule(self):
+        pass
+
+    def find_logs(self):
+        pass
+
+    def confirm_dismiss(self, instance, type):
+        res = {}
+        if type == 'card':
+            # Запрос: проверка существования карты в бд
+            res['number'] = self._result['card_result'].text
+        print(res)
+        print('Confirm')
+        self.dismiss()
+
+    def cancel_dismiss(self, instance):
+        print('Cancel')
+        self.dismiss()
+
+class AddRecordWindow(Popup):
+    _result = {}
+    _entity = StringProperty()
+
+    def __init__(self, **kwargs):
+        super(AddRecordWindow, self).__init__(**kwargs)
+
+    def open_win(self, entity):
+        self.background_color = app.themes[app.current_theme]['Additionally'][2]
+        self.separator_color = app.themes[app.current_theme]['Base'][0]
+        self._entity = entity
+
+        self.open()
+
+    def on_open(self):
+        self.add_menu()
+
+    def add_menu(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        if self._entity == 'card':
+            self.add_card()
+        elif self._entity == 'room':
+            self.add_room()
+        elif self._entity == 'right':
+            self.add_right()
+        elif self._entity == 'link':
+            self.add_link()
+        elif self._entity == 'rule':
+            self.add_rule()
+
+    def add_card(self):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
@@ -171,18 +249,77 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
-        self._result['back_button'] = Button(text='<-',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(0, 0),
-            size_hint=(None, None),
-            size=(35, 35))
-        self._result['back_button'].bind(on_release=self.add_menu)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
-    def linking_card(self, instance):
+    def add_room(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['room_name_label'] = Label(text='Room name',
+            pos=(25, self.height - 125),
+            size_hint=(None, None),
+            size=(445, 15))
+        self._result['room_name_result'] = TextInput(text='',
+            cursor_color=app.themes[app.current_theme]['Additionally'][2],
+            multiline=False,
+            pos=(25, self.height - 175),
+            size_hint=(None, None),
+            size=(445, 35))
+
+        self._result['confirm_button'] = Button(text='Confirm',
+            background_normal='',
+            background_color=app.themes[app.current_theme]['Additionally'][0],
+            pos=(self.width - 130, 0),
+            size_hint=(None, None),
+            size=(100, 35))
+        self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='room', *args))
+        self._result['cancel_button'] = Button(text='Cancel',
+            background_normal='',
+            background_color=app.themes[app.current_theme]['Additionally'][0],
+            pos=(self.width - 240, 0),
+            size_hint=(None, None),
+            size=(100, 35))
+        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
+
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
+
+    def add_right(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['right_name_label'] = Label(text='Right name',
+            pos=(25, self.height - 125),
+            size_hint=(None, None),
+            size=(445, 15))
+        self._result['right_name_result'] = TextInput(text='',
+            cursor_color=app.themes[app.current_theme]['Additionally'][2],
+            multiline=False,
+            pos=(25, self.height - 175),
+            size_hint=(None, None),
+            size=(445, 35))
+
+        self._result['confirm_button'] = Button(text='Confirm',
+            background_normal='',
+            background_color=app.themes[app.current_theme]['Additionally'][0],
+            pos=(self.width - 130, 0),
+            size_hint=(None, None),
+            size=(100, 35))
+        self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='right', *args))
+        self._result['cancel_button'] = Button(text='Cancel',
+            background_normal='',
+            background_color=app.themes[app.current_theme]['Additionally'][0],
+            pos=(self.width - 240, 0),
+            size_hint=(None, None),
+            size=(100, 35))
+        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
+
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
+
+    def add_link(self):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
@@ -239,24 +376,26 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 15))
         right_dropdown = DropDown()
-        # Запрос: список всех прав из бд
-        list_of_right = ['right_1aaaaaaaaaaaaaaaaaaaa', 'right_2', 'right_3', 'right_4', 'right_5']
 
-        for right in list_of_right:
-            btn = TipButton(text=right,
-                tip_text=right,
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                size_hint_y=None,
-                height=35,
-                text_size=(100, 35),
-                valign='center',
-                halign='center',
-                shorten=True,
-                shorten_from='right',
-                split_str='')
-            btn.bind(on_release=lambda btn: right_dropdown.select(btn.text))
-            right_dropdown.add_widget(btn)
+        # Запрос: список всех прав из бд
+        list_of_right = app.requsts_controller.get_table(table='rights', start=-1, sorting_rules={})['data']
+
+        if len(list_of_right) > 0:
+            for right in list_of_right:
+                btn = TipButton(text=right['name'],
+                    tip_text=right['name'],
+                    background_normal='',
+                    background_color=app.themes[app.current_theme]['Additionally'][0],
+                    size_hint_y=None,
+                    height=35,
+                    text_size=(100, 35),
+                    valign='center',
+                    halign='center',
+                    shorten=True,
+                    shorten_from='right',
+                    split_str='')
+                btn.bind(on_release=lambda btn: right_dropdown.select(btn.text))
+                right_dropdown.add_widget(btn)
         self._result['right_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -280,98 +419,11 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
-        self._result['back_button'] = Button(text='<-',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(0, 0),
-            size_hint=(None, None),
-            size=(35, 35))
-        self._result['back_button'].bind(on_release=self.add_menu)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
-    def add_room(self, instance):
-        self._result = {}
-        self.ids.main_area.clear_widgets()
-
-        self._result['room_name_label'] = Label(text='Room name',
-            pos=(25, self.height - 125),
-            size_hint=(None, None),
-            size=(445, 15))
-        self._result['room_name_result'] = TextInput(text='',
-            cursor_color=app.themes[app.current_theme]['Additionally'][2],
-            multiline=False,
-            pos=(25, self.height - 175),
-            size_hint=(None, None),
-            size=(445, 35))
-
-        self._result['confirm_button'] = Button(text='Confirm',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 130, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='room', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
-        self._result['back_button'] = Button(text='<-',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(0, 0),
-            size_hint=(None, None),
-            size=(35, 35))
-        self._result['back_button'].bind(on_release=self.add_menu)
-
-        for el in self._result.values():
-            self.ids.main_area.add_widget(el)
-
-    def add_right(self, instance):
-        self._result = {}
-        self.ids.main_area.clear_widgets()
-
-        self._result['right_name_label'] = Label(text='Right name',
-            pos=(25, self.height - 125),
-            size_hint=(None, None),
-            size=(445, 15))
-        self._result['right_name_result'] = TextInput(text='',
-            cursor_color=app.themes[app.current_theme]['Additionally'][2],
-            multiline=False,
-            pos=(25, self.height - 175),
-            size_hint=(None, None),
-            size=(445, 35))
-
-        self._result['confirm_button'] = Button(text='Confirm',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 130, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='right', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
-        self._result['back_button'] = Button(text='<-',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(0, 0),
-            size_hint=(None, None),
-            size=(35, 35))
-        self._result['back_button'].bind(on_release=self.add_menu)
-
-        for el in self._result.values():
-            self.ids.main_area.add_widget(el)
-
-    def add_rule(self, instance):
+    def add_rule(self):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
@@ -384,23 +436,24 @@ class AddRecordWindow(Popup):
 
 
         # Запрос: список всех комнат из бд
-        list_of_room = ['room_1', 'room_2', 'room_3', 'room_4', 'room_5']
+        list_of_room = app.requsts_controller.get_table(table='room', start=-1, sorting_rules={})['data']
 
-        for room in list_of_room:
-            btn = TipButton(text=room,
-                tip_text=room,
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                size_hint_y=None,
-                height=35,
-                text_size=(100, 35),
-                valign='center',
-                halign='center',
-                shorten=True,
-                shorten_from='right',
-                split_str='')
-            btn.bind(on_release=lambda btn: room_dropdown.select(btn.text))
-            room_dropdown.add_widget(btn)
+        if len(list_of_room) > 0:
+            for room in list_of_room:
+                btn = TipButton(text=room['name'],
+                    tip_text=room['name'],
+                    background_normal='',
+                    background_color=app.themes[app.current_theme]['Additionally'][0],
+                    size_hint_y=None,
+                    height=35,
+                    text_size=(100, 35),
+                    valign='center',
+                    halign='center',
+                    shorten=True,
+                    shorten_from='right',
+                    split_str='')
+                btn.bind(on_release=lambda btn: room_dropdown.select(btn.text))
+                room_dropdown.add_widget(btn)
         self._result['room_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -417,23 +470,24 @@ class AddRecordWindow(Popup):
             size=(200, 15))
         right_dropdown = DropDown()
         # Запрос: список всех прав из бд
-        list_of_right = ['right_1', 'right_2', 'right_3', 'right_4', 'right_5']
+        list_of_right = app.requsts_controller.get_table(table='rights', start=-1, sorting_rules={})['data']
 
-        for right in list_of_right:
-            btn = TipButton(text=right,
-                tip_text=right,
-                background_normal='',
-                background_color=app.themes[app.current_theme]['Additionally'][0],
-                size_hint_y=None,
-                height=35,
-                text_size=(100, 35),
-                valign='center',
-                halign='center',
-                shorten=True,
-                shorten_from='right',
-                split_str='')
-            btn.bind(on_release=lambda btn: right_dropdown.select(btn.text))
-            right_dropdown.add_widget(btn)
+        if len(list_of_right) > 0:
+            for right in list_of_right:
+                btn = TipButton(text=right['name'],
+                    tip_text=right['name'],
+                    background_normal='',
+                    background_color=app.themes[app.current_theme]['Additionally'][0],
+                    size_hint_y=None,
+                    height=35,
+                    text_size=(100, 35),
+                    valign='center',
+                    halign='center',
+                    shorten=True,
+                    shorten_from='right',
+                    split_str='')
+                btn.bind(on_release=lambda btn: right_dropdown.select(btn.text))
+                right_dropdown.add_widget(btn)
         self._result['right_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -457,13 +511,6 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
-        self._result['back_button'] = Button(text='<-',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(0, 0),
-            size_hint=(None, None),
-            size=(35, 35))
-        self._result['back_button'].bind(on_release=self.add_menu)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
@@ -482,22 +529,121 @@ class AddRecordWindow(Popup):
         self.dismiss()
 
 class EditRecordWindow(Popup):
+    _result = {}
+    _entity = StringProperty()
+
     def __init__(self, **kwargs):
         super(EditRecordWindow, self).__init__(**kwargs)
 
-    def open_win(self):
+    def open_win(self, entity):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
+        self._entity = entity
+
         self.open()
-        
+
+    def on_open(self):
+        self.edit_menu()
+
+    def edit_menu(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        if self._entity == 'card':
+            self.edit_card()
+        elif self._entity == 'room':
+            self.edit_room()
+        elif self._entity == 'right':
+            self.edit_right()
+        elif self._entity == 'link':
+            self.edit_link()
+        elif self._entity == 'rule':
+            self.edit_rule()
+
+    def edit_card(self):
+        pass
+
+    def edit_room(self):
+        pass
+
+    def edit_right(self):
+        pass
+
+    def edit_link(self):
+        pass
+
+    def edit_rule(self):
+        pass
+
+    def confirm_dismiss(self, instance, type):
+        res = {}
+        if type == 'card':
+            # Запрос: проверка существования карты в бд
+            res['number'] = self._result['card_result'].text
+        print(res)
+        print('Confirm')
+        self.dismiss()
+
+    def cancel_dismiss(self, instance):
+        print('Cancel')
+        self.dismiss()
+
 class DeleteRecordWindow(Popup):
     def __init__(self, **kwargs):
         super(DeleteRecordWindow, self).__init__(**kwargs)
 
-    def open_win(self):
+    def open_win(self, entity):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
+        self._entity = entity
+
         self.open()
+
+    def on_open(self):
+        self.delete_menu()
+
+    def delete_menu(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        if self._entity == 'card':
+            self.delete_card()
+        elif self._entity == 'room':
+            self.delete_room()
+        elif self._entity == 'right':
+            self.delete_right()
+        elif self._entity == 'link':
+            self.delete_link()
+        elif self._entity == 'rule':
+            self.delete_rule()
+
+    def delete_card(self):
+        pass
+
+    def delete_room(self):
+        pass
+
+    def delete_right(self):
+        pass
+
+    def delete_link(self):
+        pass
+
+    def delete_rule(self):
+        pass
+
+    def confirm_dismiss(self, instance, type):
+        res = {}
+        if type == 'card':
+            # Запрос: проверка существования карты в бд
+            res['number'] = self._result['card_result'].text
+        print(res)
+        print('Confirm')
+        self.dismiss()
+
+    def cancel_dismiss(self, instance):
+        print('Cancel')
+        self.dismiss()
 
 class CardsListWindow(Popup):
     def __init__(self, **kwargs):
@@ -507,6 +653,10 @@ class CardsListWindow(Popup):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
+
+    def on_open(self):
+        self.ids.cards_list_table.load_data(app.requsts_controller.get_table(table='cards', start=0, sorting_rules={}))
+        self.ids.cards_list_header.load_data()
        
 class RoomsListWindow(Popup):
     def __init__(self, **kwargs):
@@ -517,6 +667,10 @@ class RoomsListWindow(Popup):
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
 
+    def on_open(self):
+        self.ids.rooms_list_table.load_data(app.requsts_controller.get_table(table='rooms', start=0, sorting_rules={}))
+        self.ids.rooms_list_header.load_data()
+
 class RightsListWindow(Popup):
     def __init__(self, **kwargs):
         super(RightsListWindow, self).__init__(**kwargs)
@@ -524,4 +678,8 @@ class RightsListWindow(Popup):
     def open_win(self):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
-        self.open() 
+        self.open()
+
+    def on_open(self):
+        self.ids.rights_list_table.load_data(app.requsts_controller.get_table(table='rights', start=0, sorting_rules={}))
+        self.ids.rights_list_header.load_data()

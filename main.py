@@ -1,4 +1,5 @@
 import kivy
+import skud_api
 import Classes.Buttons
 import Classes.Table
 import Classes.Screens
@@ -20,6 +21,7 @@ Builder.load_file('MyMain.kv')
 class TestApp(App):
     def __init__(self, **kwargs):
         App.__init__(self)
+        self.requsts_controller = skud_api.SkudApiRequsts(url='', id=0)
         self.current_theme = 0
         self.themes = [
                 {
@@ -46,14 +48,12 @@ class TestApp(App):
                     'Accent': [[0, 0, .6], [.1, .1, .7], [.25, .25, .8]],
                     'Text': [0, 0, 0]
                 }]
-        global app
-        app = self
 
     def build(self):
-        Classes.Buttons.app = app
-        Classes.Table.app = app
-        Classes.Screens.app = app
-        Classes.AdditionalWindows.app = app
+        Classes.Buttons.app = self
+        Classes.Table.app = self
+        Classes.Screens.app = self
+        Classes.AdditionalWindows.app = self
         ms = Classes.Screens.MainScreen()
 
         return ms

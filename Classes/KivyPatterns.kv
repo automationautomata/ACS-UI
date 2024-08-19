@@ -3,60 +3,60 @@
 
 
 <ThemeButton>:
-    pos: (Window.width - 30, 0)
-    size: (30, 30)
+    text: 'T'
+    size_hint: (None, None)
     background_normal: ''
 
 <DomainButton>:
-    pos: (Window.width - 125, 0)
-    size: (90, 30)
+    text: 'Domain'
+    size_hint: (None, None)
     background_normal: ''
-    on_press: Factory.DomainWindow().open_win()
 
 <SortingButton>:
-    pos: (Window.width - 230, 0)
-    size: (100, 30)
+    text: 'Sorting'
+    size_hint: (None, None)
     background_normal: ''
-    on_press: Factory.SortingWindow().open_win()
+
+<FindButton>:
+    text: 'Find'
+    size_hint: (None, None)
+    background_normal: ''
 
 <AddRecordButton>:
-    pos: (0, 0)
-    size: (75, 30)
+    text: 'Add'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.AddRecordWindow().open_win()
 
 <EditRecordButton>:
-    pos: (80, 0)
-    size: (75, 30)
+    text: 'Edit'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.EditRecordWindow().open_win()
 
 <DeleteRecordButton>:
-    pos: (160, 0)
-    size: (100, 30)
+    text: 'Delete'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.DeleteRecordWindow().open_win()
 
 <CardsListButton>:
-    pos: (300, 0)
-    size: (75, 30)
+    text: 'Cards'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
     on_press: Factory.CardsListWindow().open_win()
 
 <RoomsListButton>:
-    pos: (380, 0)
-    size: (75, 30)
+    text: 'Rooms'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
     on_press: Factory.RoomsListWindow().open_win()
 
 <RightsListButton>:
-    pos: (460, 0)
-    size: (75, 30)
+    text: 'Rights'
+    size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
     on_press: Factory.RightsListWindow().open_win()
@@ -72,8 +72,25 @@
 
 <SortingWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.9, .9)
+    size_hint: (.3, .6)
     title: 'Sorting'
+    # auto_dismiss: False
+
+    RelativeLayout:
+        id: main_area
+        pos: self.pos
+        size_hint: self.size_hint
+
+<FindWindow>:
+    pos: (Window.width * .05, Window.height * .05)
+    size_hint: (.3, .6)
+    title: 'Find'
+    # auto_dismiss: False
+
+    RelativeLayout:
+        id: main_area
+        pos: self.pos
+        size_hint: self.size_hint
 
 <AddRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
@@ -88,26 +105,286 @@
 
 <EditRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.9, .9)
+    size_hint: (.3, .6)
     title: 'Edit record'
+    # auto_dismiss: False
+
+    RelativeLayout:
+        id: main_area
+        pos: self.pos
+        size_hint: self.size_hint
 
 <DeleteRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.9, .9)
+    size_hint: (.3, .6)
     title: 'Delete record'
+    # auto_dismiss: False
 
+    RelativeLayout:
+        id: main_area
+        pos: self.pos
+        size_hint: self.size_hint
 
 <CardsListWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (1500, 450)
     title: 'Cards list'
+
+    RelativeLayout:
+        id: table
+        size_hint: (None, None)
+        size: (root.width - 32.5, root.height - 85)
+
+        TableHeader:
+            id: cards_list_header
+            pos: (220, 315)
+            size_hint: (None, None)
+            size: (1250, 50)
+
+            _grid: cards_list_header_content
+            _rows: 1
+            _columns: 5
+
+            _data_titles: ('id', 'Number', 'Date the room was added', 'Date the room was deleted', 'Is sabotaged card')
+            _data_keys: ('id', 'number', 'date_time_begin', 'date_time_end', 'isSabotaged')
+
+            GridLayout:
+                id: cards_list_header_content
+                rows: cards_list_header._rows
+                cols: cards_list_header._columns
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        TableContent:
+            id: cards_list_table
+            pos: (220, 0)
+            size_hint: (None, None)
+            size: (1250, 315)
+
+            _grid: cards_list_table_content
+            _header: root.ids.cards_list_header
+            _rows: 25
+            _columns: 5
+
+            GridLayout:
+                id: cards_list_table_content
+                rows: cards_list_table._rows
+                cols: cards_list_table._columns
+                row_default_height: '20dp'
+                row_force_default: True
+                size_hint_y: None
+                height: self.minimum_height
+
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        AddRecordButton:
+            id: add_record_button
+            pos: (0, 330)
+            size: (210, 30)
+            on_press: Factory.AddRecordWindow().open_win('card')
+
+        EditRecordButton:
+            id: edit_record_button
+            pos: (0, 295)
+            size: (210, 30)
+            on_press: Factory.EditRecordWindow().open_win('card')
+
+        DeleteRecordButton:
+            id: delete_record_button
+            pos: (0, 260)
+            size: (210, 30)
+            on_press: Factory.DeleteRecordWindow().open_win('card')
+
+        SortingButton:
+            id: sorting_button
+            pos: (0, 225)
+            size: (210, 30)
+            on_press: Factory.SortingWindow().open_win('card')
+
+        FindButton:
+            id: find_button
+            pos: (0, 190)
+            size: (210, 30)
+            on_press: Factory.FindWindow().open_win('card')
 
 <RoomsListWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (1250, 450)
     title: 'Rooms list'
+
+    RelativeLayout:
+        id: table
+        size_hint: (None, None)
+        size: (root.width - 32.5, root.height - 85)
+
+        TableHeader:
+            id: rooms_list_header
+            pos: (220, 315)
+            size_hint: (None, None)
+            size: (1000, 50)
+
+            _grid: rooms_list_header_content
+            _rows: 1
+            _columns: 4
+
+            _data_titles: ('id', 'Name', 'Date the room was added', 'Date the room was deleted')
+            _data_keys: ('id', 'name', 'date_time_begin', 'date_time_end')
+
+            GridLayout:
+                id: rooms_list_header_content
+                rows: rooms_list_header._rows
+                cols: rooms_list_header._columns
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        TableContent:
+            id: rooms_list_table
+            pos: (220, 0)
+            size_hint: (None, None)
+            size: (1000, 315)
+
+            _grid: rooms_list_table_content
+            _header: root.ids.rooms_list_header
+            _rows: 25
+            _columns: 4
+
+            GridLayout:
+                id: rooms_list_table_content
+                rows: rooms_list_table._rows
+                cols: rooms_list_table._columns
+                row_default_height: '20dp'
+                row_force_default: True
+                size_hint_y: None
+                height: self.minimum_height
+
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        AddRecordButton:
+            id: add_record_button
+            pos: (0, 330)
+            size: (210, 30)
+            on_press: Factory.AddRecordWindow().open_win('room')
+
+        EditRecordButton:
+            id: edit_record_button
+            pos: (0, 295)
+            size: (210, 30)
+            on_press: Factory.EditRecordWindow().open_win('room')
+
+        DeleteRecordButton:
+            id: delete_record_button
+            pos: (0, 260)
+            size: (210, 30)
+            on_press: Factory.DeleteRecordWindow().open_win('room')
+
+        SortingButton:
+            id: sorting_button
+            pos: (0, 225)
+            size: (210, 30)
+            on_press: Factory.SortingWindow().open_win('room')
+
+        FindButton:
+            id: find_button
+            pos: (0, 190)
+            size: (210, 30)
+            on_press: Factory.FindWindow().open_win('room')
 
 <RightsListWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (1250, 450)
     title: 'Rights list'
+
+    RelativeLayout:
+        id: table
+        size_hint: (None, None)
+        size: (root.width - 32.5, root.height - 85)
+
+        TableHeader:
+            id: rights_list_header
+            pos: (220, 315)
+            size_hint: (None, None)
+            size: (1000, 50)
+
+            _grid: rights_list_header_content
+            _rows: 1
+            _columns: 4
+
+            _data_titles: ('id', 'Name', 'Date the right was added', 'Date the right was deleted')
+            _data_keys: ('id', 'name', 'date_time_begin', 'date_time_end')
+
+            GridLayout:
+                id: rights_list_header_content
+                rows: rights_list_header._rows
+                cols: rights_list_header._columns
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        TableContent:
+            id: rights_list_table
+            pos: (220, 0)
+            size_hint: (None, None)
+            size: (1000, 315)
+
+            _grid: rights_list_table_content
+            _header: root.ids.rights_list_header
+            _rows: 25
+            _columns: 4
+
+            GridLayout:
+                id: rights_list_table_content
+                rows: rights_list_table._rows
+                cols: rights_list_table._columns
+                row_default_height: '20dp'
+                row_force_default: True
+                size_hint_y: None
+                height: self.minimum_height
+
+                col_default_width: '200dp'
+                col_force_default: True
+                size_hint_x: None
+                width: self.minimum_width
+
+        AddRecordButton:
+            id: add_record_button
+            pos: (0, 330)
+            size: (210, 30)
+            on_press: Factory.AddRecordWindow().open_win('right')
+
+        EditRecordButton:
+            id: edit_record_button
+            pos: (0, 295)
+            size: (210, 30)
+            on_press: Factory.EditRecordWindow().open_win('right')
+
+        DeleteRecordButton:
+            id: delete_record_button
+            pos: (0, 260)
+            size: (210, 30)
+            on_press: Factory.DeleteRecordWindow().open_win('right')
+
+        SortingButton:
+            id: sorting_button
+            pos: (0, 225)
+            size: (210, 30)
+            on_press: Factory.SortingWindow().open_win('right')
+
+        FindButton:
+            id: find_button
+            pos: (0, 190)
+            size: (210, 30)
+            on_press: Factory.FindWindow().open_win('right')

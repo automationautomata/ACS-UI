@@ -19,7 +19,8 @@ class TokenAuth(AuthBase):
         return req
 
 class SkudApiRequsts(Singleton):
-    def __init__(self, url: str, id) -> None:
+    
+    def __init__(self, url: str, id: int) -> None:
         self.url = url
         self.token = None
         self.id = id
@@ -40,11 +41,15 @@ class SkudApiRequsts(Singleton):
         return {"action": action, 
                 "data"  : json.dumps(data)}
     
-    def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
+    def get_table(self, table: str, start: int, sorting_rules: dict) -> dict | None:
+        # start = -1 означает, что требуется предоставить все записи
+        # -----------------------------Для тестов-----------------------------
+        return {'data': [], 'error': ''}
+        # -----------------------------Для тестов-----------------------------
+
         action = f"{table} query"
         data = {"start"       : start, 
-                "order_type"  : order_type, 
-                "order_column": order_column}
+                "sorting_rules"  : sorting_rules}
  
         response = self.get(self.fmt(action,  data), "/ui")
         try: 
@@ -52,6 +57,18 @@ class SkudApiRequsts(Singleton):
         except BaseException as error:
             print("response:", response.text if response else "None", "ERR:", error)
         
+    def add_order(self, table: str, data: dict) -> bool:
+        pass
+
+    def check_order(self, table: str, data: dict):
+        pass
+
+    def edit_order(self, table: str, id, new_data: dict):
+        pass
+
+    def delete_order(self, table: str, id):
+        pass
+
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
         response = self.get({"auth": data}, "/auth")
@@ -66,3 +83,4 @@ class SkudApiRequsts(Singleton):
             return False, err
         except BaseException as error:
             return False, error
+

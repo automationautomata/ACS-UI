@@ -39,6 +39,9 @@
 
                 TableHeader:
                     id: entities_header
+                    pos: (5, Window.height - 105)
+                    size_hint: (None, None)
+                    size: (1740, 50)
 
                     _grid: entities_header_content
                     _rows: 1
@@ -58,6 +61,9 @@
 
                 TableContent:
                     id: entities_table
+                    pos: (5, 35)
+                    size_hint: (None, None)
+                    size: (1740, 610)
 
                     _grid: entities_table_content
                     _header: root.ids.entities_header
@@ -90,6 +96,9 @@
 
                 TableHeader:
                     id: access_rules_header
+                    pos: (5, Window.height - 105)
+                    size_hint: (None, None)
+                    size: (1740, 50)
 
                     _grid: access_rules_header_content
                     _rows: 1
@@ -109,6 +118,9 @@
 
                 TableContent:
                     id: access_rules_table
+                    pos: (5, 35)
+                    size_hint: (None, None)
+                    size: (1740, 610)
 
                     _grid: access_rules_table_content
                     _header: root.ids.access_rules_header
@@ -141,41 +153,60 @@
         id: footer
         ThemeButton:
             id: theme_button
-            text: 'T'
+            pos: (Window.width - 30, 0)
+            size: (30, 30)
             on_press: self.switch_theme(root)
 
         DomainButton:
             id: domain_button
-            text: 'Domain'
-            on_press: pass
+            pos: (Window.width - 125, 0)
+            size: (90, 30)
+            on_press: Factory.DomainWindow().open_win()
 
         SortingButton:
             id: sorting_button
-            text: 'Sorting'
+            pos: (Window.width - 230, 0)
+            size: (100, 30)
+            on_press: Factory.SortingWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule' if root.ids.screen_manager.current == 'rules' else 'logs')
+
+        FindButton:
+            id: find_button
+            pos: (Window.width - 335, 0)
+            size: (100, 30)
+            on_press: Factory.SortingWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule' if root.ids.screen_manager.current == 'rules' else 'logs')
 
         AddRecordButton:
             id: add_record_button
-            text: 'Add'
+            pos: (0, 0)
+            size: (75, 30)
             disabled: root.ids.screen_manager.current == 'logs'
+            on_press: Factory.AddRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
 
         EditRecordButton:
-            id: edit_record_button
-            text: 'Edit'
+            id: edit_record_button      
+            pos: (80, 0)
+            size: (75, 30)
             disabled: root.ids.screen_manager.current == 'logs'
+            on_press: Factory.EditRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
 
         DeleteRecordButton:
             id: delete_record_button
-            text: 'Delete'
+            pos: (160, 0)
+            size: (100, 30)
             disabled: root.ids.screen_manager.current == 'logs'
+            on_press: Factory.DeleteRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
 
         CardsListButton:
             id: cards_list_button
-            text: 'Cards'
+            pos: (700, 0)
+            size: (100, 30)
 
         RoomsListButton:
             id: rooms_list_button
-            text: 'Rooms'
+            pos: (810, 0)
+            size: (100, 30)
 
         RightsListButton:
             id: rights_list_button
-            text: 'Rights'
+            pos: (920, 0)
+            size: (100, 30)

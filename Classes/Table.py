@@ -43,16 +43,11 @@ class MyLabelTable(Label):
 
 class TableHeader(ScrollView):
     _grid = None
-    _width = NumericProperty(1740)
-    _height = NumericProperty(50)
     _columns_width = ListProperty()
     _data_titles = ListProperty()
 
     def __init__(self, **kwargs):
         super(TableHeader, self).__init__(**kwargs)
-        self.pos = (5, Window.height - 105)
-        self.size_hint = (None, None)
-        self.size = (self._width, self._height)
         self.bar_width = 0
         self.do_scroll_x = False
         self.do_scroll_y = False
@@ -75,17 +70,12 @@ class TableHeader(ScrollView):
 class TableContent(ScrollView):
     _grid = None
     _header = None
-    _width = NumericProperty(1740)
-    _height = NumericProperty(610)
     _rows = NumericProperty()
     _columns_width = ListProperty()
     table_data = ListProperty()
 
     def __init__(self, **kwargs):
         super(TableContent, self).__init__(**kwargs)
-        self.pos = (5, 35)
-        self.size_hint = (None, None)
-        self.size = (self._width, self._height)
         self.bar_width = 10
         self.scroll_type = ['bars'] # Перемещение с помощью ползунков
         self.always_overscroll = False
@@ -95,7 +85,7 @@ class TableContent(ScrollView):
 
         self.bind(hbar=self.scroll_content)
 
-    def load_data(self, data1, test):
+    def load_data(self, test):
         if test['error']:
             raise NameError(test['error'])
 

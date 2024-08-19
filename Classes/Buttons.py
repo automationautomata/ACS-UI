@@ -41,6 +41,15 @@ class SortingButton(Button):
         self.color = app.themes[app.current_theme]['Text']
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
 
+class FindButton(Button):
+    def __init__(self, **kwargs):
+        super(FindButton, self).__init__(**kwargs)
+        self._update()
+
+    def _update(self, *args):
+        self.color = app.themes[app.current_theme]['Text']
+        self.background_color = app.themes[app.current_theme]['Additionally'][2]
+
 class AddRecordButton(Button):
     def __init__(self, **kwargs):
         super(AddRecordButton, self).__init__(**kwargs)
