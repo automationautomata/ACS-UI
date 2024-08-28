@@ -1,6 +1,6 @@
 import json
 from typing import Any
-import requests
+import requests as req
 from requests.auth import AuthBase
 
 from Classes.singleton import Singleton
@@ -14,15 +14,20 @@ class TokenAuth(AuthBase):
 
     def __call__(self, req):
         # изменяем и возвращаем запрос
-        req.headers['X-Id'] = self.id
-        req.headers['X-Auth'] = self.token
+        if self.token:
+            req.headers['X-Id'] = self.id
+            req.headers['X-Auth'] = self.token
         return req
 
 class SkudApiRequsts(Singleton):
+<<<<<<< HEAD:Classes/skud_api.py
     def __init__(self, url: str, id: int) -> None:
+=======
+    def __init__(self, url: str, id) -> None:
+>>>>>>> 804de74623ff3ac279e0624ff0b4deab47d402a9:skud_api.py
         self.url = url
-        self.token = None
         self.id = id
+<<<<<<< HEAD:Classes/skud_api.py
         self.table_sorting_rules = {'entities_view': {'column': '',
                                         'rule': '',
                                         'deleted_record': False},
@@ -38,23 +43,28 @@ class SkudApiRequsts(Singleton):
                                     'rights': {'column': '',
                                         'rule': '',
                                         'deleted_record': False}}
+=======
+        self.token_auth = None
+        self.requests = { "get"   : req.get, 
+                          "post"  : req.post,
+                          "put"   : req.put,
+                          "delete": req.delete }
+>>>>>>> 804de74623ff3ac279e0624ff0b4deab47d402a9:skud_api.py
 
-    def get(self, body: Any, path="") -> requests.Response | None:
+    def request(self, type: str, body: Any, path="") -> req.Response | None:
         try:
-            auth = TokenAuth(self.token, self.id) if self.token else None
-
-            response = requests.get(self.url+path, data=body, auth=auth)
+            response = self.requests[type](self.url+path, data=body, auth=self.token_auth)
             if response.status_code == 200:
                 return response
             else:
                 print(f"Ошибка {response.status_code}: {response.reason}")
-        except BaseException as error:
+        except Exception as error:
             print("get ERR", error)
 
-    def fmt(self, action, data) -> dict:
-        return {"action": action, 
-                "data"  : json.dumps(data)}
+    def fmt(self, data) -> dict:
+        return { "data"  : json.dumps(data) }
     
+<<<<<<< HEAD:Classes/skud_api.py
     def switch_sorting_rules(self, table: str, column: str) -> None:
         pass
 
@@ -78,24 +88,53 @@ class SkudApiRequsts(Singleton):
         return self.table_sorting_rules[table]
 
     def get_table(self, table: str, start: int) -> dict | None:
+=======
+    def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
+>>>>>>> 804de74623ff3ac279e0624ff0b4deab47d402a9:skud_api.py
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
         return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
-        action = f"{table} query"
         data = {"start"       : start, 
+<<<<<<< HEAD:Classes/skud_api.py
                 "sorting_rules"  : self.table_sorting_rules[table]}
+=======
+                "order_type"  : order_type, 
+                "order_column": order_column}
+>>>>>>> 804de74623ff3ac279e0624ff0b4deab47d402a9:skud_api.py
  
-        response = self.get(self.fmt(action,  data), "/ui")
+        response = self.get(self.fmt(data), f"/ui/{table}")
         try: 
             return response.json()
-        except BaseException as error:
-            print("response:", response.text if response else "None", "ERR:", error)
-        
-    def add_order(self, table: str, data: dict) -> bool:
-        pass
+        except Exception as error:
+            print("response:", response.text if response else "None", 
+                  "ERR:", error)
+            
+    def get_rights(self, getall=False):
+        return self.get(self.fmt({"all": getall}), "/ui/rights")
+    
+    def authentication(self, key: int) -> tuple[bool, str]:
+        data = json.dumps({"key": key, "id": self.id})
+        response = self.get({"auth": data}, "/auth")
+        try:
+            answer = response.json()
+            print(answer)
 
+            err = "answer is None"
+            if answer:
+                err = answer["error"]
+                if err == "":
+                    self.token_auth = TokenAuth(answer["data"], self.id)
+                    return True, err
+            return False, err
+        except BaseException as error:
+            return False, error
+            
+    def add_row(self, table: str, values: dict) -> bool:
+        return self.request("post", self.fmt(values), f"/ui/{table}")
+
+<<<<<<< HEAD:Classes/skud_api.py
     def check_order(self, table: str, data: dict) -> bool:
         pass
 
@@ -104,6 +143,19 @@ class SkudApiRequsts(Singleton):
 
     def delete_order(self, table: str, id) -> bool:
         pass
+=======
+    def check_order(self, table: str, data: dict):
+        # AUTOMATA : Зачем эта штука нужна ??
+        pass
+
+    def edit_order(self, table: str, id: Any, new_values: dict):
+        data = self.fmt({"key": id, "values": new_values})
+        return self.request("post", data, f"/ui/{table}")
+
+    def delete_order(self, table: str, id):
+        data = self.fmt({"key": id})
+        return self.request("delete", data, f"/ui/{table}")
+>>>>>>> 804de74623ff3ac279e0624ff0b4deab47d402a9:skud_api.py
 
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
