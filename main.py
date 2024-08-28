@@ -1,9 +1,9 @@
 import kivy
-import skud_api
-import Classes.Buttons
-import Classes.Table
-import Classes.Screens
-import Classes.AdditionalWindows
+import Classes.skud_api as api
+import Classes.Buttons as btn
+import Classes.Table as tbl
+import Classes.Screens  as scr
+import Classes.AdditionalWindows as addit_win
 kivy.require('1.9.0')
 
 from kivy.app import App
@@ -21,7 +21,7 @@ Builder.load_file('MyMain.kv')
 class TestApp(App):
     def __init__(self, **kwargs):
         App.__init__(self)
-        self.requsts_controller = skud_api.SkudApiRequsts(url='', id=0)
+        self.requsts_controller = api.SkudApiRequsts(url='', id=0)
         self.current_theme = 0
         self.themes = [
                 {
@@ -50,11 +50,11 @@ class TestApp(App):
                 }]
 
     def build(self):
-        Classes.Buttons.app = self
-        Classes.Table.app = self
-        Classes.Screens.app = self
-        Classes.AdditionalWindows.app = self
-        ms = Classes.Screens.MainScreen()
+        btn.app = self
+        tbl.app = self
+        scr.app = self
+        addit_win.app = self
+        ms = scr.MainScreen()
 
         return ms
 

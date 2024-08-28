@@ -30,19 +30,23 @@ test = {'data': [{'card': '15',
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        self.ids.entities_table.load_data(app.requsts_controller.get_table(table='entities_view', start=0, sorting_rules={}))
-        self.ids.entities_header.load_data()
-        self.ids.access_rules_table.load_data(app.requsts_controller.get_table(table='access_rules_view', start=0, sorting_rules={}))
-        self.ids.access_rules_header.load_data()
+        self.ids.entities_table.load_data(app.requsts_controller.get_table(table='entities_view', start=0))
+        self.ids.access_rules_table.load_data(app.requsts_controller.get_table(table='access_rules_view', start=0))
+        self._update()
 
     def _update(self):
         Window.clearcolor = app.themes[app.current_theme]['Base'][0]
+        self.ids.entities_deleted_records._update()
+        self.ids.access_rules_deleted_records._update()
         self.ids.theme_button._update()
         self.ids.domain_button._update()
-        self.ids.sorting_button._update()
-        self.ids.add_order_button._update()
-        self.ids.edit_order_button._update()
-        self.ids.delete_order_button._update()
+        self.ids.add_record_button._update()
+        self.ids.edit_record_button._update()
+        self.ids.delete_record_button._update()
+        self.ids.find_button._update()
+        self.ids.cards_list_button._update()
+        self.ids.rooms_list_button._update()
+        self.ids.rights_list_button._update()
         self.ids.go_entites_screen._update()
         self.ids.go_access_rules_screen._update()
         self.ids.go_logs_screen._update()
@@ -53,11 +57,7 @@ class MainScreen(Screen):
         self.ids.access_rules_table._update()
 
 class EntitiesScreen(Screen):
-    def __init__(self, **kwargs):
-        super(EntitiesScreen, self).__init__(**kwargs)
-
-    def on_pre_enter(self, *args):
-        Window.clearcolor = app.themes[app.current_theme]['Base'][0]
+    pass
 
 class RulesScreen(Screen):
     pass

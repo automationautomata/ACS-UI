@@ -37,9 +37,15 @@
                 size_hint: (None, None)
                 size: (Window.width - 10, Window.height - 10)
 
+                ShowDeletedRecordsCheckBox:
+                    id: entities_deleted_records
+                    pos: (5, Window.height - 85)
+                    _table: 'entities_view'
+                    _root: root
+
                 TableHeader:
                     id: entities_header
-                    pos: (5, Window.height - 105)
+                    pos: (5, Window.height - 140)
                     size_hint: (None, None)
                     size: (1740, 50)
 
@@ -63,7 +69,7 @@
                     id: entities_table
                     pos: (5, 35)
                     size_hint: (None, None)
-                    size: (1740, 610)
+                    size: (1740, 575)
 
                     _grid: entities_table_content
                     _header: root.ids.entities_header
@@ -94,9 +100,15 @@
                 size_hint: (None, None)
                 size: (Window.width - 10, Window.height - 10)
 
+                ShowDeletedRecordsCheckBox:
+                    id: access_rules_deleted_records
+                    pos: (5, Window.height - 85)
+                    _table: 'access_rules_view'
+                    _root: root
+
                 TableHeader:
                     id: access_rules_header
-                    pos: (5, Window.height - 105)
+                    pos: (5, Window.height - 140)
                     size_hint: (None, None)
                     size: (1740, 50)
 
@@ -120,7 +132,7 @@
                     id: access_rules_table
                     pos: (5, 35)
                     size_hint: (None, None)
-                    size: (1740, 610)
+                    size: (1740, 575)
 
                     _grid: access_rules_table_content
                     _header: root.ids.access_rules_header
@@ -151,6 +163,7 @@
 
     Footer:
         id: footer
+
         ThemeButton:
             id: theme_button
             pos: (Window.width - 30, 0)
@@ -163,38 +176,32 @@
             size: (90, 30)
             on_press: Factory.DomainWindow().open_win()
 
-        SortingButton:
-            id: sorting_button
-            pos: (Window.width - 230, 0)
-            size: (100, 30)
-            on_press: Factory.SortingWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule' if root.ids.screen_manager.current == 'rules' else 'logs')
-
         FindButton:
             id: find_button
-            pos: (Window.width - 335, 0)
+            pos: (Window.width - 230, 0)
             size: (100, 30)
-            on_press: Factory.SortingWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule' if root.ids.screen_manager.current == 'rules' else 'logs')
+            on_press: Factory.FindWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view' if root.ids.screen_manager.current == 'rules' else 'logs')
 
         AddRecordButton:
             id: add_record_button
             pos: (0, 0)
             size: (75, 30)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.AddRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
+            on_press: Factory.AddRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         EditRecordButton:
             id: edit_record_button      
             pos: (80, 0)
             size: (75, 30)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.EditRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
+            on_press: Factory.EditRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (160, 0)
             size: (100, 30)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.DeleteRecordWindow().open_win('link' if root.ids.screen_manager.current == 'entities' else 'rule')
+            on_press: Factory.DeleteRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         CardsListButton:
             id: cards_list_button

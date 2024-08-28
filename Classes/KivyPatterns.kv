@@ -136,9 +136,15 @@
         size_hint: (None, None)
         size: (root.width - 32.5, root.height - 85)
 
+        ShowDeletedRecordsCheckBox:
+            id: cards_list_deleted_records
+            pos: self.pos
+            _table: 'cards'
+            _root: root
+
         TableHeader:
             id: cards_list_header
-            pos: (220, 315)
+            pos: (220, 310)
             size_hint: (None, None)
             size: (1250, 50)
 
@@ -162,7 +168,7 @@
             id: cards_list_table
             pos: (220, 0)
             size_hint: (None, None)
-            size: (1250, 315)
+            size: (1250, 310)
 
             _grid: cards_list_table_content
             _header: root.ids.cards_list_header
@@ -187,31 +193,25 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('card')
+            on_press: Factory.AddRecordWindow().open_win('cards')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('card')
+            on_press: Factory.EditRecordWindow().open_win('cards')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('card')
-
-        SortingButton:
-            id: sorting_button
-            pos: (0, 225)
-            size: (210, 30)
-            on_press: Factory.SortingWindow().open_win('card')
+            on_press: Factory.DeleteRecordWindow().open_win('cards')
 
         FindButton:
             id: find_button
-            pos: (0, 190)
+            pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('card')
+            on_press: Factory.FindWindow().open_win('cards')
 
 <RoomsListWindow>:
     pos: (Window.width * .05, Window.height * .05)
@@ -224,9 +224,15 @@
         size_hint: (None, None)
         size: (root.width - 32.5, root.height - 85)
 
+        ShowDeletedRecordsCheckBox:
+            id: rooms_list_deleted_records
+            pos: self.pos
+            _table: 'rooms'
+            _root: root
+
         TableHeader:
             id: rooms_list_header
-            pos: (220, 315)
+            pos: (220, 310)
             size_hint: (None, None)
             size: (1000, 50)
 
@@ -250,7 +256,7 @@
             id: rooms_list_table
             pos: (220, 0)
             size_hint: (None, None)
-            size: (1000, 315)
+            size: (1000, 310)
 
             _grid: rooms_list_table_content
             _header: root.ids.rooms_list_header
@@ -275,31 +281,25 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('room')
+            on_press: Factory.AddRecordWindow().open_win('rooms')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('room')
+            on_press: Factory.EditRecordWindow().open_win('rooms')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('room')
-
-        SortingButton:
-            id: sorting_button
-            pos: (0, 225)
-            size: (210, 30)
-            on_press: Factory.SortingWindow().open_win('room')
+            on_press: Factory.DeleteRecordWindow().open_win('rooms')
 
         FindButton:
             id: find_button
-            pos: (0, 190)
+            pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('room')
+            on_press: Factory.FindWindow().open_win('rooms')
 
 <RightsListWindow>:
     pos: (Window.width * .05, Window.height * .05)
@@ -312,9 +312,15 @@
         size_hint: (None, None)
         size: (root.width - 32.5, root.height - 85)
 
+        ShowDeletedRecordsCheckBox:
+            id: rights_list_deleted_records
+            pos: self.pos
+            _table: 'rights'
+            _root: root
+
         TableHeader:
             id: rights_list_header
-            pos: (220, 315)
+            pos: (220, 310)
             size_hint: (None, None)
             size: (1000, 50)
 
@@ -338,7 +344,7 @@
             id: rights_list_table
             pos: (220, 0)
             size_hint: (None, None)
-            size: (1000, 315)
+            size: (1000, 310)
 
             _grid: rights_list_table_content
             _header: root.ids.rights_list_header
@@ -363,28 +369,22 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('right')
+            on_press: Factory.AddRecordWindow().open_win('rights')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('right')
+            on_press: Factory.EditRecordWindow().open_win('rights')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('right')
-
-        SortingButton:
-            id: sorting_button
-            pos: (0, 225)
-            size: (210, 30)
-            on_press: Factory.SortingWindow().open_win('right')
+            on_press: Factory.DeleteRecordWindow().open_win('rights')
 
         FindButton:
             id: find_button
-            pos: (0, 190)
+            pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('right')
+            on_press: Factory.FindWindow().open_win('rights')

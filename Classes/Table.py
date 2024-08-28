@@ -5,6 +5,7 @@ from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.widget import Widget
 from kivy.uix.label import Label
+from kivy.uix.button import Button
 from kivy.graphics import Color, Rectangle
 
 from kivy.properties import StringProperty, ListProperty, NumericProperty
@@ -17,13 +18,23 @@ class MyLabelHeader(Label):
         super(MyLabelHeader, self).__init__(**kwargs)
 
     def on_size(self, *args):
+        self._update(app.themes[app.current_theme]['Additionally'][0])
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            self._update(app.themes[app.current_theme]['Additionally'][3])
+
+    def on_touch_up(self, touch):
+        if self.collide_point(*touch.pos):
+            self._update(app.themes[app.current_theme]['Additionally'][0])
+
+    def _update(self, back):
         self.canvas.before.clear()
-        self.background_normal = ''
         self.color = app.themes[app.current_theme]['Text']
         with self.canvas.before:
             Color(*app.themes[app.current_theme]['Base'][0])
             Rectangle(pos=self.pos, size=self.size)
-            Color(*app.themes[app.current_theme]['Additionally'][0])
+            Color(*back)
             Rectangle(pos=(self.x + 1, self.y + 1), size=(self.width - 2, self.height - 2))
 
 class MyLabelTable(Label):
@@ -33,7 +44,6 @@ class MyLabelTable(Label):
     def on_size(self, *args):
         self.parent_win = self.parent.parent
         self.canvas.before.clear()
-        self.background_normal = ''
         self.color = app.themes[app.current_theme]['Text']
         with self.canvas.before:
             Color(*app.themes[app.current_theme]['Base'][0])
@@ -45,15 +55,13 @@ class TableHeader(ScrollView):
     _grid = None
     _columns_width = ListProperty()
     _data_titles = ListProperty()
+    _data_keys = ListProperty()
 
     def __init__(self, **kwargs):
         super(TableHeader, self).__init__(**kwargs)
         self.bar_width = 0
         self.do_scroll_x = False
         self.do_scroll_y = False
-
-    def load_data(self, *args):
-        self._update()
 
     def _update(self, *args):
         self._grid.clear_widgets()
