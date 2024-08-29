@@ -85,13 +85,13 @@ class ShowDeletedRecordsCheckBox(FloatLayout):
         if self._table == 'entities_view':
             self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='entities_view', start=0))
         elif self._table == 'access_rules_view':
-            self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='access_rules_view', start=0))
+            self._root.ids.access_rules_table.load_data(app.requsts_controller.get_table(table='access_rules_view', start=0))
         elif self._table == 'cards':
-            self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='cards', start=0))
+            self._root.ids.cards_list_table.load_data(app.requsts_controller.get_table(table='cards', start=0))
         elif self._table == 'rooms':
-            self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='rooms', start=0))
+            self._root.ids.rooms_list_table.load_data(app.requsts_controller.get_table(table='rooms', start=0))
         elif self._table == 'rights':
-            self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='rights', start=0))
+            self._root.ids.rights_list_table.load_data(app.requsts_controller.get_table(table='rights', start=0))
 
 class ThemeButton(Button):
     def __init__(self, **kwargs):

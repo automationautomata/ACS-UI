@@ -23,20 +23,20 @@ class SkudApiRequsts(Singleton):
     def __init__(self, url: str, id: int) -> None:
         self.url = url
         self.id = id
-        self.table_sorting_rules = {'entities_view': {'column': '',
-                                        'rule': '',
+        self.table_sorting_rules = {'entities_view': {'column': 'card',
+                                        'rule': 'default',
                                         'deleted_record': False},
-                                    'access_rules_view': {'column': '',
-                                        'rule': '',
+                                    'access_rules_view': {'column': 'room',
+                                        'rule': 'default',
                                         'deleted_record': False},
-                                    'cards': {'column': '',
-                                        'rule': '',
+                                    'cards': {'column': 'id',
+                                        'rule': 'default',
                                         'deleted_record': False},
-                                    'rooms': {'column': '',
-                                        'rule': '',
+                                    'rooms': {'column': 'id',
+                                        'rule': 'default',
                                         'deleted_record': False},
-                                    'rights': {'column': '',
-                                        'rule': '',
+                                    'rights': {'column': 'id',
+                                        'rule': 'default',
                                         'deleted_record': False}}
         self.token_auth = None
         self.requests = { "get"   : req.get, 
@@ -57,11 +57,26 @@ class SkudApiRequsts(Singleton):
     def fmt(self, data) -> dict:
         return { "data"  : json.dumps(data) }
     
-    def switch_sorting_rules(self, table: str, column: str) -> None:
-        pass
-
-    def switch_sorting_rules(self, table: str, deleted_record: bool) -> None:
-        self.table_sorting_rules[table]['deleted_record'] = deleted_record
+    def switch_sorting_rules(self, table: str, column: str | None=None, deleted_record: bool | None=None) -> None:
+        def next_rule(rule):
+            if rule == 'default':
+                return 'A-Z'
+            elif rule == 'A-Z':
+                return 'Z-A'
+            else:
+                return 'default'
+        if deleted_record is None:
+            if self.table_sorting_rules[table]['column'] == column:
+                self.table_sorting_rules[table]['rule'] = next_rule(self.table_sorting_rules[table]['rule'])
+            else:
+                self.table_sorting_rules[table]['column'] = column
+                self.table_sorting_rules[table]['rule'] = 'default'
+                self.table_sorting_rules[table]['rule'] = next_rule(self.table_sorting_rules[table]['rule'])
+            #self.check()
+            return self.table_sorting_rules[table]['rule']
+        elif column is None:
+            self.table_sorting_rules[table]['deleted_record'] = deleted_record
+            #self.check()
 
 
     def check(self):
@@ -83,7 +98,7 @@ class SkudApiRequsts(Singleton):
     #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
-        #return {'data': [], 'error': ''}
+        return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
         # data = {"start"       : start, 
