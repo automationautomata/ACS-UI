@@ -1,21 +1,26 @@
 import kivy
+kivy.require('1.9.0')
+from kivy.config import Config
+import os
+
+Config.read(os.path.split(os.path.realpath(__file__))[0] + '\\' + 'config.ini')
+'''Config.set('input', 'mouse', 'mouse,disable_multitouch')
+Config.set('graphics', 'resizable', 'false')
+Config.set('graphics', 'width', '1400')
+Config.set('graphics', 'height', '600')'''
+#Config.write()
+
+
 import Classes.skud_api as api
 import Classes.Buttons as btn
 import Classes.Table as tbl
 import Classes.Screens  as scr
 import Classes.AdditionalWindows as addit_win
-kivy.require('1.9.0')
 
 from kivy.app import App
-from kivy.config import Config
 from kivy.lang import Builder
 
 
-Config.set('input', 'mouse', 'mouse,disable_multitouch')
-Config.set('graphics', 'resizable', 'false')
-Config.set('graphics', 'width', '1400')
-Config.set('graphics', 'height', '600')
-Config.write()
 Builder.load_file('MyMain.kv')
 
 class TestApp(App):
