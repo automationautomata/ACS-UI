@@ -13,7 +13,7 @@ from kivy.lang import Builder
 
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 Config.set('graphics', 'resizable', 'false')
-Config.set('graphics', 'width', '1400')
+Config.set('graphics', 'width', '1600')
 Config.set('graphics', 'height', '600')
 Config.write()
 Builder.load_file('MyMain.kv')

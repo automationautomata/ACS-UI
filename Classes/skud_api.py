@@ -98,7 +98,7 @@ class SkudApiRequests():
     #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
-        return {'data': [], 'error': ''}
+        #return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
         # data = {"start"       : start, 
