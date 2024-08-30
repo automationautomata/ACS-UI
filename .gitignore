@@ -1,8 +1,5 @@
 Как гитить.txt
-__pycache__
+**/__pycache__
 test.py
-<<<<<<< HEAD
-=======
 **/.venv
 **/venv
->>>>>>> 0d545cfca33c3bb207582bf02fd4b4c98ddf63dd

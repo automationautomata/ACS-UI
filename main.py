@@ -2,14 +2,7 @@ import kivy
 kivy.require('1.9.0')
 from kivy.config import Config
 import os
-
 Config.read(os.path.split(os.path.realpath(__file__))[0] + '\\' + 'config.ini')
-'''Config.set('input', 'mouse', 'mouse,disable_multitouch')
-Config.set('graphics', 'resizable', 'false')
-Config.set('graphics', 'width', '1400')
-Config.set('graphics', 'height', '600')'''
-#Config.write()
-
 
 import Classes.skud_api as api
 import Classes.Buttons as btn
@@ -20,15 +13,6 @@ import Classes.AdditionalWindows as addit_win
 from kivy.app import App
 from kivy.lang import Builder
 
-
-<<<<<<< HEAD
-=======
-Config.set('input', 'mouse', 'mouse,disable_multitouch')
-Config.set('graphics', 'resizable', 'false')
-Config.set('graphics', 'width', '1600')
-Config.set('graphics', 'height', '600')
-Config.write()
->>>>>>> 0d545cfca33c3bb207582bf02fd4b4c98ddf63dd
 Builder.load_file('MyMain.kv')
 api_args = "http://localhost:9092", 1
 class TestApp(App):

@@ -72,24 +72,9 @@ class SkudApiRequests():
                 self.table_sorting_rules[table]['column'] = column
                 self.table_sorting_rules[table]['rule'] = 'default'
                 self.table_sorting_rules[table]['rule'] = next_rule(self.table_sorting_rules[table]['rule'])
-            #self.check()
             return self.table_sorting_rules[table]['rule']
         elif column is None:
             self.table_sorting_rules[table]['deleted_record'] = deleted_record
-            #self.check()
-
-
-    def check(self):
-        print('--------')
-        print('-------------------')
-        print('-----------------------------')
-        for table in self.table_sorting_rules.keys():
-            print(table)
-            print('   column: ', self.table_sorting_rules[table]['column'])
-            print('   rule: ', self.table_sorting_rules[table]['rule'])
-            print('   deleted_record: ', self.table_sorting_rules[table]['deleted_record'])
-            print('-----------------------------')
-
 
     def get_sorting_rules(self, table: str) -> dict:
         return self.table_sorting_rules[table]
@@ -98,7 +83,7 @@ class SkudApiRequests():
     #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
-        #return {'data': [], 'error': ''}
+        return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
         # data = {"start"       : start, 

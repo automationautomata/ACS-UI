@@ -1,4 +1,4 @@
-#:import Window kivy.core.window.Window
+#: import Window kivy.core.window.Window
 #: include Classes/KivyPatterns.kv
 
 
@@ -31,67 +31,63 @@
         EntitiesScreen:
             id: entities_screen
             name: 'entities'
+            size_hint: (None, None)
             size: Window.size
 
-            FloatLayout:
+            ShowDeletedRecordsCheckBox:
+                id: entities_deleted_records
+                pos: (5, Window.height - 85)
+                _table: 'entities_view'
+                _root: root
+
+            TableHeader:
+                id: entities_header
+                pos: (5, Window.height - 140)
                 size_hint: (None, None)
-                size: (Window.width - 10, Window.height - 10)
+                size: (1740, 50)
 
-                ShowDeletedRecordsCheckBox:
-                    id: entities_deleted_records
-                    pos: (5, Window.height - 85)
-                    _table: 'entities_view'
-                    _root: root
+                _grid: entities_header_content
+                _rows: 1
+                _columns: 12
 
-                TableHeader:
-                    id: entities_header
-                    pos: (5, Window.height - 140)
-                    size_hint: (None, None)
-                    size: (1740, 50)
+                _data_titles: ('Card', 'Name (sid)', 'Type', 'Right', 'Right ID', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
+                _data_keys: ('card', 'sid', 'type', 'rightName', 'right', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
+                _table: 'entities_view'
+                _root: root
 
-                    _grid: entities_header_content
-                    _rows: 1
-                    _columns: 12
+                GridLayout:
+                    id: entities_header_content
+                    rows: entities_header._rows
+                    cols: entities_header._columns
+                    col_default_width: '250dp'
+                    col_force_default: True
+                    size_hint_x: None
+                    width: self.minimum_width
 
-                    _data_titles: ('Card', 'Name (sid)', 'Type', 'Right', 'Right ID', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
-                    _data_keys: ('card', 'sid', 'type', 'rightName', 'right', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
-                    _table: 'entities_view'
-                    _root: root
+            TableContent:
+                id: entities_table
+                pos: (5, 35)
+                size_hint: (None, None)
+                size: (1740, 575)
 
-                    GridLayout:
-                        id: entities_header_content
-                        rows: entities_header._rows
-                        cols: entities_header._columns
-                        col_default_width: '250dp'
-                        col_force_default: True
-                        size_hint_x: None
-                        width: self.minimum_width
+                _grid: entities_table_content
+                _header: root.ids.entities_header
+                _rows: 25
+                _columns: 12
 
-                TableContent:
-                    id: entities_table
-                    pos: (5, -125)
-                    # pos: (5, 35)
-                    size_hint: (None, None)
-                    size: (1740, 575)
+                GridLayout:
+                    id: entities_table_content
+                    rows: entities_table._rows
+                    cols: entities_table._columns
+                    row_default_height: '20dp'
+                    row_force_default: True
+                    size_hint_y: None
+                    height: self.minimum_height
 
-                    _grid: entities_table_content
-                    _header: root.ids.entities_header
-                    _rows: 25
-                    _columns: 12
-
-                    GridLayout:
-                        id: entities_table_content
-                        rows: entities_table._rows
-                        cols: entities_table._columns
-                        row_default_height: '20dp'
-                        row_force_default: True
-                        size_hint_y: None
-                        height: self.minimum_height
-
-                        col_default_width: '250dp'
-                        col_force_default: True
-                        size_hint_x: None
-                        width: self.minimum_width
+                    col_default_width: '250dp'
+                    col_force_default: True
+                    size_hint_x: None
+                    width: self.minimum_width
 
 
         RulesScreen:
@@ -99,73 +95,66 @@
             name: 'rules'
             size: Window.size
 
-            FloatLayout:
+            ShowDeletedRecordsCheckBox:
+                id: access_rules_deleted_records
+                pos: (5, Window.height - 85)
+                _table: 'access_rules_view'
+                _root: root
+
+            TableHeader:
+                id: access_rules_header
+                pos: (5, Window.height - 140)
                 size_hint: (None, None)
-                size: (Window.width - 10, Window.height - 10)
+                size: (1740, 50)
 
-                ShowDeletedRecordsCheckBox:
-                    id: access_rules_deleted_records
-                    pos: (5, Window.height - 85)
-                    _table: 'access_rules_view'
-                    _root: root
+                _grid: access_rules_header_content
+                _rows: 1
+                _columns: 10
 
-                TableHeader:
-                    id: access_rules_header
-                    pos: (5, Window.height - 140)
-                    size_hint: (None, None)
-                    size: (1740, 50)
+                _data_titles: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
+                _data_keys: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
+                _table: 'access_rules_view'
+                _root: root
 
-                    _grid: access_rules_header_content
-                    _rows: 1
-                    _columns: 10
+                GridLayout:
+                    id: access_rules_header_content
+                    rows: access_rules_header._rows
+                    cols: access_rules_header._columns
+                    col_default_width: '250dp'
+                    col_force_default: True
+                    size_hint_x: None
+                    width: self.minimum_width
 
-                    _data_titles: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
-                    _data_keys: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
-                    _table: 'access_rules_view'
-                    _root: root
+            TableContent:
+                id: access_rules_table
+                pos: (5, 35)
+                size_hint: (None, None)
+                size: (1740, 575)
 
-                    GridLayout:
-                        id: access_rules_header_content
-                        rows: access_rules_header._rows
-                        cols: access_rules_header._columns
-                        col_default_width: '250dp'
-                        col_force_default: True
-                        size_hint_x: None
-                        width: self.minimum_width
+                _grid: access_rules_table_content
+                _header: root.ids.access_rules_header
+                _rows: 25
+                _columns: 10
 
-                TableContent:
-                    id: access_rules_table
-                    pos: (5, -125)
-                    # pos: (5, 35)
-                    size_hint: (None, None)
-                    size: (1740, 575)
+                GridLayout:
+                    id: access_rules_table_content
+                    rows: access_rules_table._rows
+                    cols: access_rules_table._columns
+                    row_default_height: '20dp'
+                    row_force_default: True
+                    size_hint_y: None
+                    height: self.minimum_height
 
-                    _grid: access_rules_table_content
-                    _header: root.ids.access_rules_header
-                    _rows: 25
-                    _columns: 10
-
-                    GridLayout:
-                        id: access_rules_table_content
-                        rows: access_rules_table._rows
-                        cols: access_rules_table._columns
-                        row_default_height: '20dp'
-                        row_force_default: True
-                        size_hint_y: None
-                        height: self.minimum_height
-
-                        col_default_width: '250dp'
-                        col_force_default: True
-                        size_hint_x: None
-                        width: self.minimum_width
+                    col_default_width: '250dp'
+                    col_force_default: True
+                    size_hint_x: None
+                    width: self.minimum_width
 
 
         LogsScreen:
             id: logs_screen
             name: 'logs'
             size: Window.size
-
-            FloatLayout:
 
     Footer:
         id: footer

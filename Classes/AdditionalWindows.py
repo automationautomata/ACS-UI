@@ -418,7 +418,7 @@ class AddRecordWindow(Popup):
         if type == 'card':
             # Запрос: проверка существования карты в бд
             res['number'] = self._result['card_result'].text
-        print(res)
+        
         print('Confirm')
         self.dismiss()
 
