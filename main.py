@@ -21,12 +21,20 @@ from kivy.app import App
 from kivy.lang import Builder
 
 
+<<<<<<< HEAD
+=======
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+Config.set('graphics', 'resizable', 'false')
+Config.set('graphics', 'width', '1600')
+Config.set('graphics', 'height', '600')
+Config.write()
+>>>>>>> 0d545cfca33c3bb207582bf02fd4b4c98ddf63dd
 Builder.load_file('MyMain.kv')
-
+api_args = "http://localhost:9092", 1
 class TestApp(App):
     def __init__(self, **kwargs):
         App.__init__(self)
-        self.requsts_controller = api.SkudApiRequsts(url='', id=0)
+        self.requsts_controller = api.SkudApiRequests(url=api_args[0], id=api_args[1])
         self.current_theme = 0
         self.themes = [
                 {

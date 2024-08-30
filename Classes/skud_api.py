@@ -3,7 +3,7 @@ from typing import Any
 import requests as req
 from requests.auth import AuthBase
 
-from Classes.singleton import Singleton
+#from Classes.singleton import Singleton
 
 class TokenAuth(AuthBase):
     """Присоединяет HTTP аутентификацию к объекту запроса."""
@@ -19,7 +19,7 @@ class TokenAuth(AuthBase):
             req.headers['X-Auth'] = self.token
         return req
 
-class SkudApiRequsts(Singleton):
+class SkudApiRequests():
     def __init__(self, url: str, id: int) -> None:
         self.url = url
         self.id = id
@@ -44,9 +44,9 @@ class SkudApiRequsts(Singleton):
                           "put"   : req.put,
                           "delete": req.delete }
 
-    def request(self, type: str, body: Any, path=""): #-> req.Response | None:
+    def request(self, type: str, body: Any, path="", headers=None): #-> req.Response | None:
         try:
-            response = self.requests[type](self.url+path, data=body, auth=self.token_auth)
+            response = self.requests[type](self.url+path, data=body, auth=self.token_auth, headers=headers)
             if response.status_code == 200:
                 return response
             else:
@@ -54,8 +54,8 @@ class SkudApiRequsts(Singleton):
         except Exception as error:
             print("get ERR", error)
 
-    def fmt(self, data) -> dict:
-        return { "data"  : json.dumps(data) }
+    def fmt(self, arg_name, data) -> dict:
+        return { arg_name  : json.dumps(data) }
     
     def switch_sorting_rules(self, table: str, column: str | None=None, deleted_record: bool | None=None) -> None:
         def next_rule(rule):
@@ -98,7 +98,7 @@ class SkudApiRequsts(Singleton):
     #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
-        return {'data': [], 'error': ''}
+        #return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
         # data = {"start"       : start, 
@@ -109,7 +109,7 @@ class SkudApiRequsts(Singleton):
         data = {"start"       : start, 
                 "order_type"  : sorting_rules["rule"],
                 "order_column": sorting_rules["column"]}
-        response = self.request("get", self.fmt(data), f"/ui/{table}")
+        response = self.request("get", self.fmt("params", data), f"/ui/{table}", headers={"NULL": str(sorting_rules["deleted_record"])})
         try: 
             return response.json()
         except Exception as error:
@@ -153,7 +153,7 @@ class SkudApiRequsts(Singleton):
 
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
-        response = self.get({"auth": data}, "/auth")
+        response = self.request("get", {"auth": data}, "/auth")
         try:
             answer = response.json()
             err = "answer is None"
@@ -165,8 +165,4 @@ class SkudApiRequsts(Singleton):
             return False, err
         except BaseException as error:
             return False, error
-
-
-
-
 
