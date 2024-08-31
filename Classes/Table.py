@@ -14,8 +14,6 @@ global app
 
 
 class MyLabelHeader(Label):
-    sorting_rule = 'default'
-
     def __init__(self, column_key, **kwargs):
         super(MyLabelHeader, self).__init__(**kwargs)
 
@@ -26,7 +24,7 @@ class MyLabelHeader(Label):
         table_header = self.parent.parent
         if self.collide_point(*touch.pos):
             self._update(app.themes[app.current_theme]['Additionally'][3])
-            self.current_rule = app.requsts_controller.switch_sorting_rules(table=table_header._table,
+            app.requsts_controller.switch_sorting_rules(table=table_header._table,
                 column=table_header._data_keys[table_header._data_titles.index(self.text)])
 
     def on_touch_up(self, touch):

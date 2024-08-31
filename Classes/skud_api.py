@@ -57,7 +57,7 @@ class SkudApiRequests():
     def fmt(self, arg_name, data) -> dict:
         return { arg_name  : json.dumps(data) }
     
-    def switch_sorting_rules(self, table: str, column: str | None=None, deleted_record: bool | None=None) -> None:
+    def switch_sorting_rules(self, table: str, column: str | None=None) -> None:
         def next_rule(rule):
             if rule == 'default':
                 return 'A-Z'
@@ -65,16 +65,16 @@ class SkudApiRequests():
                 return 'Z-A'
             else:
                 return 'default'
-        if deleted_record is None:
+        
+        if column is None:
+            self.table_sorting_rules[table]['deleted_record'] = not self.table_sorting_rules[table]['deleted_record']
+        else:
             if self.table_sorting_rules[table]['column'] == column:
                 self.table_sorting_rules[table]['rule'] = next_rule(self.table_sorting_rules[table]['rule'])
             else:
                 self.table_sorting_rules[table]['column'] = column
                 self.table_sorting_rules[table]['rule'] = 'default'
                 self.table_sorting_rules[table]['rule'] = next_rule(self.table_sorting_rules[table]['rule'])
-            return self.table_sorting_rules[table]['rule']
-        elif column is None:
-            self.table_sorting_rules[table]['deleted_record'] = deleted_record
 
     def get_sorting_rules(self, table: str) -> dict:
         return self.table_sorting_rules[table]

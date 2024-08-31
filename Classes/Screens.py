@@ -36,8 +36,6 @@ class MainScreen(Screen):
 
     def _update(self):
         Window.clearcolor = app.themes[app.current_theme]['Base'][0]
-        self.ids.entities_deleted_records._update()
-        self.ids.access_rules_deleted_records._update()
         self.ids.theme_button._update()
         self.ids.domain_button._update()
         self.ids.add_record_button._update()

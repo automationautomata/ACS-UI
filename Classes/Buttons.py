@@ -60,11 +60,8 @@ class ShowDeletedRecordsCheckBox(FloatLayout):
         self.bind(_table=self._update)
 
     def _update(self, *args):
-        self.canvas.before.clear()
         self.clear_widgets()
 
-        self.canvas.before.add(Color(*app.themes[app.current_theme]['Additionally'][0]))
-        self.canvas.before.add(Rectangle(pos=self.pos, size=self.size))
         checkbox = CheckBox(pos=self.pos,
             size_hint=(None, None),
             size=(30, 30),
@@ -80,7 +77,7 @@ class ShowDeletedRecordsCheckBox(FloatLayout):
         self.add_widget(label)
 
     def on_checkbox_active(self, instance, state):
-        app.requsts_controller.switch_sorting_rules(table=self._table, deleted_record=state)
+        app.requsts_controller.switch_sorting_rules(table=self._table)
 
         if self._table == 'entities_view':
             self._root.ids.entities_table.load_data(app.requsts_controller.get_table(table='entities_view', start=0))
