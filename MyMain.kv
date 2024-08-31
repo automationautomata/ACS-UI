@@ -7,21 +7,21 @@
     ExplorerButton:
         id: go_entites_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (0, Window.height - 50)
+        pos: (0, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
         text: "Entities"
         on_press: screen_manager.current = "entities"
 
     ExplorerButton:
         id: go_access_rules_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (Window.width / 3 + 1, Window.height - 50)
+        pos: (Window.width / 3 + 1, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
         text: 'Access rules'
         on_press: screen_manager.current = "rules"
 
     ExplorerButton:
         id: go_logs_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (Window.width * 2 / 3 + 2, Window.height - 50)
+        pos: (Window.width * 2 / 3 + 2, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
         text: 'Logs'
         on_press: screen_manager.current = "logs"
 
@@ -31,20 +31,18 @@
         EntitiesScreen:
             id: entities_screen
             name: 'entities'
-            size_hint: (None, None)
-            size: Window.size
 
             ShowDeletedRecordsCheckBox:
                 id: entities_deleted_records
-                pos: (5, Window.height - 85)
                 _table: 'entities_view'
+                pos: (5, root.ids.entities_header.y + root.ids.entities_header.height + 5)
                 _root: root
 
             TableHeader:
                 id: entities_header
-                pos: (5, Window.height - 140)
+                pos: (5, root.ids.entities_table.y + root.ids.entities_table.height + 1)
                 size_hint: (None, None)
-                size: (1740, 50)
+                size: (Window.width - 10, 50)
 
                 _grid: entities_header_content
                 _rows: 1
@@ -66,9 +64,9 @@
 
             TableContent:
                 id: entities_table
-                pos: (5, 35)
+                pos: (5, root.ids.footer.height + 5)
                 size_hint: (None, None)
-                size: (1740, 575)
+                size: (Window.width - 10, Window.height - 180)
 
                 _grid: entities_table_content
                 _header: root.ids.entities_header
@@ -97,15 +95,15 @@
 
             ShowDeletedRecordsCheckBox:
                 id: access_rules_deleted_records
-                pos: (5, Window.height - 85)
                 _table: 'access_rules_view'
+                pos: (5, root.ids.access_rules_header.y + root.ids.access_rules_header.height + 5)
                 _root: root
 
             TableHeader:
                 id: access_rules_header
-                pos: (5, Window.height - 140)
+                pos: (5, root.ids.access_rules_table.y + root.ids.access_rules_table.height + 1)
                 size_hint: (None, None)
-                size: (1740, 50)
+                size: (Window.width - 10, 50)
 
                 _grid: access_rules_header_content
                 _rows: 1
@@ -127,9 +125,9 @@
 
             TableContent:
                 id: access_rules_table
-                pos: (5, 35)
+                pos: (5, root.ids.footer.height + 5)
                 size_hint: (None, None)
-                size: (1740, 575)
+                size: (Window.width - 10,  Window.height - 180)
 
                 _grid: access_rules_table_content
                 _header: root.ids.access_rules_header
@@ -158,57 +156,67 @@
 
     Footer:
         id: footer
+        pos: (0, 0)
+        size_hint: (None, None)
+        size: (Window.width, Window.height * .04)
 
         ThemeButton:
             id: theme_button
             pos: (Window.width - 30, 0)
-            size: (30, 30)
+            size: (30, footer.height)
             on_press: self.switch_theme(root)
 
         DomainButton:
             id: domain_button
-            pos: (Window.width - 125, 0)
-            size: (90, 30)
+            pos: (root.ids.theme_button.x - 95, 0)
+            size: (90, footer.height)
             on_press: Factory.DomainWindow().open_win()
 
         FindButton:
             id: find_button
-            pos: (Window.width - 230, 0)
-            size: (100, 30)
+            pos: (root.ids.domain_button.x - 105, 0)
+            size: (100, footer.height)
             on_press: Factory.FindWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view' if root.ids.screen_manager.current == 'rules' else 'logs')
 
         AddRecordButton:
             id: add_record_button
             pos: (0, 0)
-            size: (75, 30)
+            size: (75, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
             on_press: Factory.AddRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         EditRecordButton:
             id: edit_record_button      
-            pos: (80, 0)
-            size: (75, 30)
+            pos: (root.ids.add_record_button.x + root.ids.add_record_button.width + 5, 0)
+            size: (75, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
             on_press: Factory.EditRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         DeleteRecordButton:
             id: delete_record_button
-            pos: (160, 0)
-            size: (100, 30)
+            pos: (root.ids.edit_record_button.x + root.ids.edit_record_button.width + 5, 0)
+            size: (100, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
             on_press: Factory.DeleteRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         CardsListButton:
             id: cards_list_button
-            pos: (700, 0)
-            size: (100, 30)
+            pos: (Window.width * .4, 0)
+            size: (100, footer.height)
 
         RoomsListButton:
             id: rooms_list_button
-            pos: (810, 0)
-            size: (100, 30)
+            pos: (root.ids.cards_list_button.x + root.ids.cards_list_button.width + 5, 0)
+            size: (100, footer.height)
 
         RightsListButton:
             id: rights_list_button
-            pos: (920, 0)
-            size: (100, 30)
+            pos: (root.ids.rooms_list_button.x + root.ids.rooms_list_button.width + 5, 0)
+            size: (100, footer.height)
+        
+    Button:
+        pos: (Window.width / 2 - 25, Window.height / 2 - 25)
+        size_hint: (None, None)
+        size: (50, 50)
+        text: 'Test'
+        on_press: print(Window.size)

@@ -123,15 +123,15 @@ class AddRecordWindow(Popup):
         self.ids.main_area.clear_widgets()
 
         self._result['card_label'] = Label(text='Card number',
-            pos=(25, self.height - 125),
+            pos=(110, self.height - 125),
             size_hint=(None, None),
-            size=(445, 15))
+            size=(350, 15))
         self._result['card_result'] = TextInput(text='',
             cursor_color=app.themes[app.current_theme]['Additionally'][2],
             multiline=False,
-            pos=(25, self.height - 175),
+            pos=(110, self.height - 175),
             size_hint=(None, None),
-            size=(445, 35))
+            size=(350, 35))
 
         self._result['confirm_button'] = Button(text='Confirm',
             background_normal='',
@@ -156,15 +156,15 @@ class AddRecordWindow(Popup):
         self.ids.main_area.clear_widgets()
 
         self._result['room_name_label'] = Label(text='Room name',
-            pos=(25, self.height - 125),
+            pos=(110, self.height - 125),
             size_hint=(None, None),
-            size=(445, 15))
+            size=(350, 15))
         self._result['room_name_result'] = TextInput(text='',
             cursor_color=app.themes[app.current_theme]['Additionally'][2],
             multiline=False,
-            pos=(25, self.height - 175),
+            pos=(110, self.height - 175),
             size_hint=(None, None),
-            size=(445, 35))
+            size=(350, 35))
 
         self._result['confirm_button'] = Button(text='Confirm',
             background_normal='',
@@ -189,15 +189,15 @@ class AddRecordWindow(Popup):
         self.ids.main_area.clear_widgets()
 
         self._result['right_name_label'] = Label(text='Right name',
-            pos=(25, self.height - 125),
+            pos=(110, self.height - 125),
             size_hint=(None, None),
-            size=(445, 15))
+            size=(350, 15))
         self._result['right_name_result'] = TextInput(text='',
             cursor_color=app.themes[app.current_theme]['Additionally'][2],
             multiline=False,
-            pos=(25, self.height - 175),
+            pos=(110, self.height - 175),
             size_hint=(None, None),
-            size=(445, 35))
+            size=(350, 35))
 
         self._result['confirm_button'] = Button(text='Confirm',
             background_normal='',
@@ -224,25 +224,25 @@ class AddRecordWindow(Popup):
         self._result['card_label'] = Label(text='Card number',
             pos=(25, self.height - 125),
             size_hint=(None, None),
-            size=(200, 15))
+            size=(250, 15))
         self._result['card_result'] = TextInput(text='',
             cursor_color=app.themes[app.current_theme]['Additionally'][2],
             multiline=False,
             pos=(25, self.height - 175),
             size_hint=(None, None),
-            size=(200, 35))
+            size=(250, 35))
         self._result['sid_label'] = Label(text='sid',
             pos=(25, self.height - 225),
             size_hint=(None, None),
-            size=(200, 15))
+            size=(250, 15))
         self._result['sid_result'] = TextInput(text='',
             cursor_color=app.themes[app.current_theme]['Additionally'][2],
             multiline=False,
             pos=(25, self.height - 275),
             size_hint=(None, None),
-            size=(200, 35))
+            size=(250, 35))
         self._result['type_label'] = Label(text='Type',
-            pos=(250, self.height - 125),
+            pos=(325, self.height - 125),
             size_hint=(None, None),
             size=(100, 15))
         type_dropdown = DropDown()
@@ -264,13 +264,13 @@ class AddRecordWindow(Popup):
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
             border=[10, 10, 10, 10],
-            pos=(250, self.height - 175),
+            pos=(325, self.height - 175),
             size_hint=(None, None),
             size=(100, 35))
         self._result['type_result'].bind(on_release=type_dropdown.open)
         type_dropdown.bind(on_select=lambda instance, x: setattr(self._result['type_result'], 'text', x))
         self._result['right_label'] = Label(text='Right',
-            pos=(375, self.height - 125),
+            pos=(450, self.height - 125),
             size_hint=(None, None),
             size=(100, 15))
         right_dropdown = DropDown()
@@ -297,7 +297,7 @@ class AddRecordWindow(Popup):
         self._result['right_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(375, self.height - 175),
+            pos=(450, self.height - 175),
             size_hint=(None, None),
             size=(100, 35))
         self._result['right_result'].bind(on_release=right_dropdown.open)
@@ -327,7 +327,7 @@ class AddRecordWindow(Popup):
 
 
         self._result['room_label'] = Label(text='Room',
-            pos=(25, self.height - 125),
+            pos=(60, self.height - 125),
             size_hint=(None, None),
             size=(200, 15))
         room_dropdown = DropDown()
@@ -355,7 +355,7 @@ class AddRecordWindow(Popup):
         self._result['room_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(25, self.height - 175),
+            pos=(60, self.height - 175),
             size_hint=(None, None),
             size=(200, 35))
         self._result['room_result'].bind(on_release=room_dropdown.open)
@@ -363,7 +363,7 @@ class AddRecordWindow(Popup):
 
 
         self._result['right_label'] = Label(text='Right',
-            pos=(270, self.height - 125),
+            pos=(315, self.height - 125),
             size_hint=(None, None),
             size=(200, 15))
         right_dropdown = DropDown()
@@ -389,7 +389,7 @@ class AddRecordWindow(Popup):
         self._result['right_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(270, self.height - 175),
+            pos=(315, self.height - 175),
             size_hint=(None, None),
             size=(200, 35))
         self._result['right_result'].bind(on_release=right_dropdown.open)

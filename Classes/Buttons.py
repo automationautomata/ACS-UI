@@ -59,6 +59,10 @@ class ShowDeletedRecordsCheckBox(FloatLayout):
         self.size = (210, 30)
         self.bind(_table=self._update)
 
+    def on_pos(self, *args):
+        if self._table:
+            self._update()
+
     def _update(self, *args):
         self.clear_widgets()
 

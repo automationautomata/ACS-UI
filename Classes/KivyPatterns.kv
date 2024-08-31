@@ -94,36 +94,42 @@
 
 <AddRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Add record'
     auto_dismiss: False
 
     RelativeLayout:
         id: main_area
         pos: self.pos
-        size_hint: self.size_hint
+        size_hint: (None, None)
+        size: root.size
 
 <EditRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Edit record'
     # auto_dismiss: False
 
     RelativeLayout:
         id: main_area
         pos: self.pos
-        size_hint: self.size_hint
+        size_hint: (None, None)
+        size: root.size
 
 <DeleteRecordWindow>:
     pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Delete record'
     # auto_dismiss: False
 
     RelativeLayout:
         id: main_area
         pos: self.pos
-        size_hint: self.size_hint
+        size_hint: (None, None)
+        size: root.size
 
 # ЗДЕСЬ ДЕРЬМО!!! НАДО ИСПРАВЛЯТЬ!!!
 <CardsListWindow>:
@@ -141,8 +147,8 @@
 
         ShowDeletedRecordsCheckBox:
             id: cards_list_deleted_records
-            pos: self.pos
             _table: 'cards'
+            pos: self.pos
             _root: root
 
         TableHeader:
@@ -231,8 +237,8 @@
 
         ShowDeletedRecordsCheckBox:
             id: rooms_list_deleted_records
-            pos: self.pos
             _table: 'rooms'
+            pos: self.pos
             _root: root
 
         TableHeader:
@@ -321,8 +327,8 @@
 
         ShowDeletedRecordsCheckBox:
             id: rights_list_deleted_records
-            pos: self.pos
             _table: 'rights'
+            pos: self.pos
             _root: root
 
         TableHeader:

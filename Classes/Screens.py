@@ -36,6 +36,8 @@ class MainScreen(Screen):
 
     def _update(self):
         Window.clearcolor = app.themes[app.current_theme]['Base'][0]
+        self.ids.entities_deleted_records._update()
+        self.ids.access_rules_deleted_records._update()
         self.ids.theme_button._update()
         self.ids.domain_button._update()
         self.ids.add_record_button._update()
@@ -66,11 +68,10 @@ class LogsScreen(Screen):
 
 class Footer(Widget):
     def on_size(self, *args):
-        with self.canvas.before:
-            Color(*app.themes[app.current_theme]['Additionally'][0])
-            Rectangle(pos=(0, 0), size=(Window.width, 30))
+        self._update()
 
     def _update(self):
         self.canvas.before.clear()
-        self.canvas.before.add(Color(*app.themes[app.current_theme]['Additionally'][0]))
-        self.canvas.before.add(Rectangle(pos=(0, 0), size=(Window.width, 30)))
+        with self.canvas.before:
+            Color(*app.themes[app.current_theme]['Additionally'][0])
+            Rectangle(pos=self.pos, size=self.size)
