@@ -17,7 +17,8 @@ class DomainWindow(Popup):
     def __init__(self, **kwargs):
         super(DomainWindow, self).__init__(**kwargs)
 
-    def open_win(self):
+    def open_win(self) -> None:
+        ''''''
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()

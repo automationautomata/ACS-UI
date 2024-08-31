@@ -46,10 +46,10 @@
 
                 _grid: entities_header_content
                 _rows: 1
-                _columns: 12
+                _columns: 13
 
-                _data_titles: ('Card', 'Name (sid)', 'Type', 'Right', 'Right ID', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
-                _data_keys: ('card', 'sid', 'type', 'rightName', 'right', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
+                _data_titles: ('Id', 'Card', 'Name (sid)', 'Type', 'Right', 'Right ID', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
+                _data_keys: ('id', 'card', 'sid', 'type', 'rightName', 'right', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
                 _table: 'entities_view'
                 _root: root
 
@@ -72,7 +72,7 @@
                 _grid: entities_table_content
                 _header: root.ids.entities_header
                 _rows: 25
-                _columns: 12
+                _columns: 13
 
                 GridLayout:
                     id: entities_table_content
@@ -108,10 +108,10 @@
 
                 _grid: access_rules_header_content
                 _rows: 1
-                _columns: 10
+                _columns: 11
 
-                _data_titles: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
-                _data_keys: ('room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
+                _data_titles: ('Id', 'Room id', 'Name of room', 'Date the room was added', 'Date the room was deleted', 'Right id', 'Name of right', 'Date the right was added', 'Date the right was deleted', 'Date the rule was added', 'Date the rule was deleted')
+                _data_keys: ('id', 'room', 'roomName', 'roomAddDate', 'roomDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'ruleAddDate', 'ruleDelDate')
                 _table: 'access_rules_view'
                 _root: root
 
@@ -134,7 +134,7 @@
                 _grid: access_rules_table_content
                 _header: root.ids.access_rules_header
                 _rows: 25
-                _columns: 10
+                _columns: 11
 
                 GridLayout:
                     id: access_rules_table_content

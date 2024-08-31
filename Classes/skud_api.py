@@ -80,7 +80,7 @@ class SkudApiRequests():
         return self.table_sorting_rules[table]
 
     def get_table(self, table: str, start: int): #-> dict | None:
-    #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
+        #def get_table(self, table: str, start: int, order_column: str, order_type: bool) -> dict | None:
         # start = -1 означает, что требуется предоставить все записи
         # -----------------------------Для тестов-----------------------------
         return {'data': [], 'error': ''}
@@ -100,10 +100,7 @@ class SkudApiRequests():
         except Exception as error:
             print("response:", response.text if response else "None", 
                   "ERR:", error)
-            
-    def get_rights(self, getall=False):
-        return self.request("get", self.fmt({"all": getall}), "/ui/rights")
-    
+
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
         response = self.request("get", {"auth": data}, "/auth")
@@ -120,21 +117,21 @@ class SkudApiRequests():
             return False, err
         except BaseException as error:
             return False, error
-            
-    def add_row(self, table: str, values: dict) -> bool:
-        return self.request("post", self.fmt(values), f"/ui/{table}")
 
-    def check_order(self, table: str, data: dict):
-        # AUTOMATA : Зачем эта штука нужна ??
-        pass
+    def add_record(self, table: str, values: dict) -> bool:
+        data = self.fmt({"values": values})
+        return self.request("post", data, f"/ui/{table}")
 
-    def edit_order(self, table: str, id: Any, new_values: dict):
+    def edit_record(self, table: str, id: Any, new_values: dict):
         data = self.fmt({"key": id, "values": new_values})
         return self.request("post", data, f"/ui/{table}")
 
-    def delete_order(self, table: str, id):
+    def delete_record(self, table: str, id: Any):
         data = self.fmt({"key": id})
         return self.request("delete", data, f"/ui/{table}")
+
+    def find_record(self, table: str, values: dict) -> dict:
+        pass
 
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
