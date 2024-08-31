@@ -7,21 +7,21 @@
     ExplorerButton:
         id: go_entites_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (0, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
+        pos: (0, Window.height - 50)
         text: "Entities"
         on_press: screen_manager.current = "entities"
 
     ExplorerButton:
         id: go_access_rules_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (Window.width / 3 + 1, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
+        pos: (Window.width / 3 + 1, Window.height - 50)
         text: 'Access rules'
         on_press: screen_manager.current = "rules"
 
     ExplorerButton:
         id: go_logs_screen
         size: (Window.width / 3 - 2, 50)
-        pos: (Window.width * 2 / 3 + 2, root.ids.entities_deleted_records.y + root.ids.entities_deleted_records.height + 5)
+        pos: (Window.width * 2 / 3 + 2, Window.height - 50)
         text: 'Logs'
         on_press: screen_manager.current = "logs"
 
@@ -35,12 +35,12 @@
             ShowDeletedRecordsCheckBox:
                 id: entities_deleted_records
                 _table: 'entities_view'
-                pos: (5, root.ids.entities_header.y + root.ids.entities_header.height + 5)
+                pos: (5, Window.height - 85)
                 _root: root
 
             TableHeader:
                 id: entities_header
-                pos: (5, root.ids.entities_table.y + root.ids.entities_table.height + 1)
+                pos: (5, Window.height - 140)
                 size_hint: (None, None)
                 size: (Window.width - 10, 50)
 
@@ -64,9 +64,10 @@
 
             TableContent:
                 id: entities_table
-                pos: (5, root.ids.footer.height + 5)
+                pos: (5, Window.height - self.height - 140)
                 size_hint: (None, None)
-                size: (Window.width - 10, Window.height - 180)
+                width: Window.width - 10
+                height: Window.height - 175 if Window.height < 800 else 625
 
                 _grid: entities_table_content
                 _header: root.ids.entities_header
@@ -96,12 +97,12 @@
             ShowDeletedRecordsCheckBox:
                 id: access_rules_deleted_records
                 _table: 'access_rules_view'
-                pos: (5, root.ids.access_rules_header.y + root.ids.access_rules_header.height + 5)
+                pos: (5, Window.height - 85)
                 _root: root
 
             TableHeader:
                 id: access_rules_header
-                pos: (5, root.ids.access_rules_table.y + root.ids.access_rules_table.height + 1)
+                pos: (5, Window.height - 140)
                 size_hint: (None, None)
                 size: (Window.width - 10, 50)
 
@@ -125,9 +126,10 @@
 
             TableContent:
                 id: access_rules_table
-                pos: (5, root.ids.footer.height + 5)
+                pos: (5, Window.height - self.height - 140)
                 size_hint: (None, None)
-                size: (Window.width - 10,  Window.height - 180)
+                width: Window.width - 10
+                height: Window.height - 175 if Window.height < 800 else 625
 
                 _grid: access_rules_table_content
                 _header: root.ids.access_rules_header
@@ -158,7 +160,8 @@
         id: footer
         pos: (0, 0)
         size_hint: (None, None)
-        size: (Window.width, Window.height * .04)
+        width: Window.width
+        height: Window.height * .04 if Window.height > 750 else 30
 
         ThemeButton:
             id: theme_button
@@ -187,29 +190,30 @@
 
         EditRecordButton:
             id: edit_record_button      
-            pos: (root.ids.add_record_button.x + root.ids.add_record_button.width + 5, 0)
+            pos: (root.ids.add_record_button.right + 5, 0)
             size: (75, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
             on_press: Factory.EditRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         DeleteRecordButton:
             id: delete_record_button
-            pos: (root.ids.edit_record_button.x + root.ids.edit_record_button.width + 5, 0)
+            pos: (root.ids.edit_record_button.right + 5, 0)
             size: (100, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
             on_press: Factory.DeleteRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         CardsListButton:
             id: cards_list_button
-            pos: (Window.width * .4, 0)
+            pos: (Window.width * .5 - 140, 0)
             size: (100, footer.height)
 
         RoomsListButton:
             id: rooms_list_button
-            pos: (root.ids.cards_list_button.x + root.ids.cards_list_button.width + 5, 0)
+            pos: (root.ids.cards_list_button.right + 5, 0)
             size: (100, footer.height)
 
         RightsListButton:
             id: rights_list_button
-            pos: (root.ids.rooms_list_button.x + root.ids.rooms_list_button.width + 5, 0)
+            pos: (root.ids.rooms_list_button.right + 5, 0)
             size: (100, footer.height)
+

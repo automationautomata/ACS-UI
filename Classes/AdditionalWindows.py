@@ -115,8 +115,6 @@ class AddRecordWindow(Popup):
             self.menu_link()
         elif self._entity == 'access_rules_view':
             self.menu_rule()
-        elif self._entity == 'logs':
-            self.menu_logs()
 
     def menu_card(self):
         self._result = {}
@@ -459,22 +457,64 @@ class EditRecordWindow(Popup):
             self.menu_rule()
 
     def menu_card(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Edit card',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_room(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Edit room',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_right(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Edit right',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_link(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Edit link',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_rule(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
 
-    def menu_logs(self):
-        pass
+        self._result['...'] = Label(text='Edit rule',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def confirm_dismiss(self, instance, type):
         res = {}
@@ -490,6 +530,9 @@ class EditRecordWindow(Popup):
         self.dismiss()
 
 class DeleteRecordWindow(Popup):
+    _result = {}
+    _entity = StringProperty()
+
     def __init__(self, **kwargs):
         super(DeleteRecordWindow, self).__init__(**kwargs)
 
@@ -519,22 +562,64 @@ class DeleteRecordWindow(Popup):
             self.menu_rule()
 
     def menu_card(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Delete card',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_room(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Delete room',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_right(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Delete right',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_link(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self._result['...'] = Label(text='Delete link',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def menu_rule(self):
-        pass
+        self._result = {}
+        self.ids.main_area.clear_widgets()
 
-    def menu_logs(self):
-        pass
+        self._result['...'] = Label(text='Delete rule',
+            pos=(110, self.height - 200),
+            size_hint=(None, None),
+            size=(350, 15))
+        
+        for el in self._result.values():
+            self.ids.main_area.add_widget(el)
 
     def confirm_dismiss(self, instance, type):
         res = {}

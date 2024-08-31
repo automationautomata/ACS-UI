@@ -103,7 +103,10 @@ class TableHeader(ScrollView):
         if dist == 0:
             self.scroll_x = 0
         else:
-            self.scroll_x = dist[0] / (1 - dist[1])
+            if dist[1] == 1:
+                self.scroll_x = 1
+            else:
+                self.scroll_x = dist[0] / (1 - dist[1])
 
 class TableContent(ScrollView):
     _grid = None

@@ -122,7 +122,7 @@
     pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
     size: (600, 350)
-    title: 'Delete record'
+    title: 'Edit record'
     # auto_dismiss: False
 
     RelativeLayout:
@@ -131,31 +131,26 @@
         size_hint: (None, None)
         size: root.size
 
-# ЗДЕСЬ ДЕРЬМО!!! НАДО ИСПРАВЛЯТЬ!!!
 <CardsListWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
-    size: (1500, 450) # КАКОГО ХЕРА ЗДЕСБ 1500, КОГДА МАКСИМУМ 1400?!?!
-
-    size: (1500, 450)
+    size: (Window.width, 450)
+    width: 1500 if Window.width > 1500 else Window.width
+    height: 450
     title: 'Cards list'
 
     RelativeLayout:
         id: table
-        size_hint: (None, None)
-        size: (root.width - 32.5, root.height - 85)
 
         ShowDeletedRecordsCheckBox:
             id: cards_list_deleted_records
             _table: 'cards'
-            pos: self.pos
             _root: root
 
         TableHeader:
             id: cards_list_header
-            pos: (220, 310)
+            pos: (215, root.ids.cards_list_table.top + 1)
             size_hint: (None, None)
-            size: (1250, 50)
+            size: (root.width - 250, 50)
 
             _grid: cards_list_header_content
             _rows: 1
@@ -177,9 +172,9 @@
 
         TableContent:
             id: cards_list_table
-            pos: (220, 0)
+            pos: (215, 0)
             size_hint: (None, None)
-            size: (1250, 310)
+            size: (root.width - 250, 310)
 
             _grid: cards_list_table_content
             _header: root.ids.cards_list_header
@@ -225,27 +220,24 @@
             on_press: Factory.FindWindow().open_win('cards')
 
 <RoomsListWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
-    size: (1250, 450)
+    width: 1250 if Window.width > 1250 else Window.width
+    height: 450
     title: 'Rooms list'
 
     RelativeLayout:
         id: table
-        size_hint: (None, None)
-        size: (root.width - 32.5, root.height - 85)
 
         ShowDeletedRecordsCheckBox:
             id: rooms_list_deleted_records
             _table: 'rooms'
-            pos: self.pos
             _root: root
 
         TableHeader:
             id: rooms_list_header
-            pos: (220, 310)
+            pos: (215, root.ids.rooms_list_table.top + 1)
             size_hint: (None, None)
-            size: (1000, 50)
+            size: (root.width - 250, 50)
 
             _grid: rooms_list_header_content
             _rows: 1
@@ -267,9 +259,9 @@
 
         TableContent:
             id: rooms_list_table
-            pos: (220, 0)
+            pos: (215, 0)
             size_hint: (None, None)
-            size: (1000, 310)
+            size: (root.width - 250, 310)
 
             _grid: rooms_list_table_content
             _header: root.ids.rooms_list_header
@@ -315,27 +307,24 @@
             on_press: Factory.FindWindow().open_win('rooms')
 
 <RightsListWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
-    size: (1250, 450)
+    width: 1250 if Window.width > 1250 else Window.width
+    height: 450
     title: 'Rights list'
 
     RelativeLayout:
         id: table
-        size_hint: (None, None)
-        size: (root.width - 32.5, root.height - 85)
 
         ShowDeletedRecordsCheckBox:
             id: rights_list_deleted_records
             _table: 'rights'
-            pos: self.pos
             _root: root
 
         TableHeader:
             id: rights_list_header
-            pos: (220, 310)
+            pos: (215, root.ids.rights_list_table.top + 1)
             size_hint: (None, None)
-            size: (1000, 50)
+            size: (root.width - 250, 50)
 
             _grid: rights_list_header_content
             _rows: 1
@@ -357,9 +346,9 @@
 
         TableContent:
             id: rights_list_table
-            pos: (220, 0)
+            pos: (215, 0)
             size_hint: (None, None)
-            size: (1000, 310)
+            size: (root.width - 250, 310)
 
             _grid: rights_list_table_content
             _header: root.ids.rights_list_header
@@ -403,3 +392,4 @@
             pos: (0, 225)
             size: (210, 30)
             on_press: Factory.FindWindow().open_win('rights')
+
