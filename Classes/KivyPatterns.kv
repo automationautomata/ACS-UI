@@ -66,34 +66,42 @@
     background_normal: ''
 
 <DomainWindow>:
-    pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.9, .9)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Domain'
+    auto_dismiss: False
+
+    RelativeLayout:
+        id: main_area
+        pos: self.pos
+        size_hint: (None, None)
+        size: root.size
 
 <SortingWindow>:
-    pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Sorting'
-    # auto_dismiss: False
+    auto_dismiss: False
 
     RelativeLayout:
         id: main_area
         pos: self.pos
-        size_hint: self.size_hint
+        size_hint: (None, None)
+        size: root.size
 
 <FindWindow>:
-    pos: (Window.width * .05, Window.height * .05)
-    size_hint: (.3, .6)
+    size_hint: (None, None)
+    size: (600, 350)
     title: 'Find'
-    # auto_dismiss: False
+    auto_dismiss: False
 
     RelativeLayout:
         id: main_area
         pos: self.pos
-        size_hint: self.size_hint
+        size_hint: (None, None)
+        size: root.size
 
 <AddRecordWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
     size: (600, 350)
     title: 'Add record'
@@ -106,11 +114,10 @@
         size: root.size
 
 <EditRecordWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
     size: (600, 350)
     title: 'Edit record'
-    # auto_dismiss: False
+    auto_dismiss: False
 
     RelativeLayout:
         id: main_area
@@ -119,11 +126,10 @@
         size: root.size
 
 <DeleteRecordWindow>:
-    pos: (Window.width * .05, Window.height * .05)
     size_hint: (None, None)
     size: (600, 350)
     title: 'Edit record'
-    # auto_dismiss: False
+    auto_dismiss: False
 
     RelativeLayout:
         id: main_area
@@ -137,6 +143,7 @@
     width: 1500 if Window.width > 1500 else Window.width
     height: 450
     title: 'Cards list'
+    auto_dismiss: False
 
     RelativeLayout:
         id: table
@@ -224,6 +231,7 @@
     width: 1250 if Window.width > 1250 else Window.width
     height: 450
     title: 'Rooms list'
+    auto_dismiss: False
 
     RelativeLayout:
         id: table
@@ -311,6 +319,7 @@
     width: 1250 if Window.width > 1250 else Window.width
     height: 450
     title: 'Rights list'
+    auto_dismiss: False
 
     RelativeLayout:
         id: table

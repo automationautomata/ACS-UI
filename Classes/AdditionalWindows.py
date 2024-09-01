@@ -2,12 +2,15 @@ import kivy
 import Classes.Buttons
 kivy.require('1.9.0')
 
+import Classes.Buttons as btn
+
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.dropdown import DropDown
 
+from kivy.graphics import Color, Rectangle, Line, Triangle
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
 global app
@@ -22,6 +25,18 @@ class DomainWindow(Popup):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
+
+    def on_open(self):
+        self.domain_menu()
+
+    def domain_menu(self):
+        self._result = {}
+        self.ids.main_area.clear_widgets()
+
+        self.ids.main_area.add_widget(btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self))
 
 class FindWindow(Popup):
     def __init__(self, **kwargs):
@@ -40,6 +55,11 @@ class FindWindow(Popup):
     def find_menu(self):
         self._result = {}
         self.ids.main_area.clear_widgets()
+
+        self.ids.main_area.add_widget(btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self))
 
         if self._entity == 'cards':
             self.menu_card()
@@ -81,10 +101,6 @@ class FindWindow(Popup):
         print('Confirm')
         self.dismiss()
 
-    def cancel_dismiss(self, instance):
-        print('Cancel')
-        self.dismiss()
-
 class AddRecordWindow(Popup):
     _result = {}
     _entity = StringProperty()
@@ -106,6 +122,11 @@ class AddRecordWindow(Popup):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
+        self.ids.main_area.add_widget(btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self))
+
         if self._entity == 'cards':
             self.menu_card()
         elif self._entity == 'rooms':
@@ -119,7 +140,6 @@ class AddRecordWindow(Popup):
 
     def menu_card(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['card_label'] = Label(text='Card number',
             pos=(110, self.height - 125),
@@ -139,20 +159,12 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='card', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
     def menu_room(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['room_name_label'] = Label(text='Room name',
             pos=(110, self.height - 125),
@@ -172,20 +184,12 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='room', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
     def menu_right(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['right_name_label'] = Label(text='Right name',
             pos=(110, self.height - 125),
@@ -205,20 +209,12 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='right', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
     def menu_link(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['card_label'] = Label(text='Card number',
             pos=(25, self.height - 125),
@@ -309,20 +305,12 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='link', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
 
     def menu_rule(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
 
         self._result['room_label'] = Label(text='Room',
@@ -401,13 +389,6 @@ class AddRecordWindow(Popup):
             size_hint=(None, None),
             size=(100, 35))
         self._result['confirm_button'].bind(on_release=lambda *args: self.confirm_dismiss(type='right', *args))
-        self._result['cancel_button'] = Button(text='Cancel',
-            background_normal='',
-            background_color=app.themes[app.current_theme]['Additionally'][0],
-            pos=(self.width - 240, 0),
-            size_hint=(None, None),
-            size=(100, 35))
-        self._result['cancel_button'].bind(on_release=self.cancel_dismiss)
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
@@ -419,10 +400,6 @@ class AddRecordWindow(Popup):
             res['number'] = self._result['card_result'].text
         
         print('Confirm')
-        self.dismiss()
-
-    def cancel_dismiss(self, instance):
-        print('Cancel')
         self.dismiss()
 
 class EditRecordWindow(Popup):
@@ -446,6 +423,11 @@ class EditRecordWindow(Popup):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
+        self.ids.main_area.add_widget(btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self))
+
         if self._entity == 'cards':
             self.menu_card()
         elif self._entity == 'rooms':
@@ -459,7 +441,6 @@ class EditRecordWindow(Popup):
 
     def menu_card(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Edit card',
             pos=(110, self.height - 200),
@@ -471,7 +452,6 @@ class EditRecordWindow(Popup):
 
     def menu_room(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Edit room',
             pos=(110, self.height - 200),
@@ -483,7 +463,6 @@ class EditRecordWindow(Popup):
 
     def menu_right(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Edit right',
             pos=(110, self.height - 200),
@@ -495,7 +474,6 @@ class EditRecordWindow(Popup):
 
     def menu_link(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Edit link',
             pos=(110, self.height - 200),
@@ -507,7 +485,6 @@ class EditRecordWindow(Popup):
 
     def menu_rule(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Edit rule',
             pos=(110, self.height - 200),
@@ -524,10 +501,6 @@ class EditRecordWindow(Popup):
             res['number'] = self._result['card_result'].text
         print(res)
         print('Confirm')
-        self.dismiss()
-
-    def cancel_dismiss(self, instance):
-        print('Cancel')
         self.dismiss()
 
 class DeleteRecordWindow(Popup):
@@ -551,6 +524,11 @@ class DeleteRecordWindow(Popup):
         self._result = {}
         self.ids.main_area.clear_widgets()
 
+        self.ids.main_area.add_widget(btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self))
+
         if self._entity == 'cards':
             self.menu_card()
         elif self._entity == 'rooms':
@@ -564,7 +542,6 @@ class DeleteRecordWindow(Popup):
 
     def menu_card(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Delete card',
             pos=(110, self.height - 200),
@@ -576,7 +553,6 @@ class DeleteRecordWindow(Popup):
 
     def menu_room(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Delete room',
             pos=(110, self.height - 200),
@@ -588,7 +564,6 @@ class DeleteRecordWindow(Popup):
 
     def menu_right(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Delete right',
             pos=(110, self.height - 200),
@@ -600,7 +575,6 @@ class DeleteRecordWindow(Popup):
 
     def menu_link(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Delete link',
             pos=(110, self.height - 200),
@@ -612,7 +586,6 @@ class DeleteRecordWindow(Popup):
 
     def menu_rule(self):
         self._result = {}
-        self.ids.main_area.clear_widgets()
 
         self._result['...'] = Label(text='Delete rule',
             pos=(110, self.height - 200),
@@ -631,11 +604,9 @@ class DeleteRecordWindow(Popup):
         print('Confirm')
         self.dismiss()
 
-    def cancel_dismiss(self, instance):
-        print('Cancel')
-        self.dismiss()
-
 class CardsListWindow(Popup):
+    close_button = None
+
     def __init__(self, **kwargs):
         super(CardsListWindow, self).__init__(**kwargs)
 
@@ -643,6 +614,15 @@ class CardsListWindow(Popup):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
+
+    def on_size(self, *args):
+        if self.close_button:
+            self.ids.table.remove_widget(self.close_button)
+        self.close_button = btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self)
+        self.ids.table.add_widget(self.close_button)
 
     def on_open(self):
         self.ids.cards_list_table.load_data(app.requsts_controller.get_table(table='cards', start=0))
@@ -653,6 +633,8 @@ class CardsListWindow(Popup):
         self.ids.cards_list_table._update()
 
 class RoomsListWindow(Popup):
+    close_button = None
+    
     def __init__(self, **kwargs):
         super(RoomsListWindow, self).__init__(**kwargs)
 
@@ -660,6 +642,15 @@ class RoomsListWindow(Popup):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
+
+    def on_size(self, *args):
+        if self.close_button:
+            self.ids.table.remove_widget(self.close_button)
+        self.close_button = btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self)
+        self.ids.table.add_widget(self.close_button)
 
     def on_open(self):
         self.ids.rooms_list_table.load_data(app.requsts_controller.get_table(table='rooms', start=0))
@@ -670,6 +661,8 @@ class RoomsListWindow(Popup):
         self.ids.rooms_list_table._update()
 
 class RightsListWindow(Popup):
+    close_button = None
+    
     def __init__(self, **kwargs):
         super(RightsListWindow, self).__init__(**kwargs)
 
@@ -677,6 +670,15 @@ class RightsListWindow(Popup):
         self.background_color = app.themes[app.current_theme]['Additionally'][2]
         self.separator_color = app.themes[app.current_theme]['Base'][0]
         self.open()
+
+    def on_size(self, *args):
+        if self.close_button:
+            self.ids.table.remove_widget(self.close_button)
+        self.close_button = btn.CloseButton(pos=(self.width - 60, self.height - 57.5),
+            size_hint=(None, None),
+            size=(25, 25),
+            win=self)
+        self.ids.table.add_widget(self.close_button)
 
     def on_open(self):
         self.ids.rights_list_table.load_data(app.requsts_controller.get_table(table='rights', start=0))

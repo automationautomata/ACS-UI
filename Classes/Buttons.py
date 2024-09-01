@@ -7,7 +7,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.uix.checkbox import CheckBox
-from kivy.graphics import Color, Rectangle
+from kivy.graphics import Color, Rectangle, Line
 
 from kivy.properties import StringProperty, ListProperty, NumericProperty
 
@@ -192,3 +192,38 @@ class ExplorerButton(Button):
     def _update(self, *args):
         self.color = app.themes[app.current_theme]['Text']
         self.background_color = app.themes[app.current_theme]['Base'][2]
+
+class CloseButton(Button):
+    window = None
+    background_color = (0, 0, 0, 0)
+    bg_normal_color = ListProperty([1, 0, 0, 1])
+    bg_down_color = ListProperty([1, 0, 1, 1])
+    check_collide = False
+    def __init__(self, win, **kwargs):
+        super(CloseButton, self).__init__(**kwargs)
+        self._update(self.bg_normal_color)
+        self.window = win
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            self.check_collide = True
+            self._update(self.bg_down_color)
+
+    def on_touch_up(self, touch):
+        self._update(self.bg_normal_color)
+        
+        if self.check_collide:
+            if self.collide_point(*touch.pos):
+                self.window.dismiss()
+        self.check_collide = False
+
+    def _update(self, color):
+        self.canvas.before.clear()
+        
+        with self.canvas.before:
+            Color(*color)
+            Rectangle(pos=self.pos,
+                size=self.size)
+            Color(0, 0, 0, .7)
+            Line(points=(self.x + 5, self.y + 5, self.right - 5, self.top - 5), width=2)
+            Line(points=(self.right - 5, self.y + 5, self.x + 5, self.top - 5), width=2)
