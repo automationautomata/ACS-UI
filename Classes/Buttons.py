@@ -28,7 +28,7 @@ class HoverBehavior(object):
         if not self.get_root_window():
             return
         pos = args[1]
-        inside = self.collide_point(*self.to_widget(*pos))
+        inside = self.collide_point(*self.to_widget(*pos)) and Window.to_window(*pos)[0] < Window.width - 2 and Window.to_window(*pos)[0] > 0 and Window.to_window(*pos)[1] < Window.height - 2 and Window.to_window(*pos)[1] > 0
         if self.hovered == inside:
             return
         self.border_point = pos
@@ -211,6 +211,12 @@ class ThemeButton(RootButton):
     def __init__(self, **kwargs):
         super(ThemeButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -229,6 +235,12 @@ class DomainButton(RootButton):
     def __init__(self, **kwargs):
         super(DomainButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -246,6 +258,12 @@ class FindButton(RootButton):
     def __init__(self, **kwargs):
         super(FindButton, self).__init__(**kwargs)
         
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -259,6 +277,12 @@ class FindButton(RootButton):
 class AddRecordButton(RootButton):
     def __init__(self, **kwargs):
         super(AddRecordButton, self).__init__(**kwargs)
+
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
 
     def on_kv_post(self, widget):
         self._update_theme()
@@ -274,6 +298,12 @@ class EditRecordButton(RootButton):
     def __init__(self, **kwargs):
         super(EditRecordButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -287,6 +317,12 @@ class EditRecordButton(RootButton):
 class DeleteRecordButton(RootButton):
     def __init__(self, **kwargs):
         super(DeleteRecordButton, self).__init__(**kwargs)
+
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
 
     def on_kv_post(self, widget):
         self._update_theme()
@@ -302,6 +338,12 @@ class CardsListButton(RootButton):
     def __init__(self, **kwargs):
         super(CardsListButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -315,6 +357,12 @@ class CardsListButton(RootButton):
 class RoomsListButton(RootButton):
     def __init__(self, **kwargs):
         super(RoomsListButton, self).__init__(**kwargs)
+
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
 
     def on_kv_post(self, widget):
         self._update_theme()
@@ -330,6 +378,12 @@ class RightsListButton(RootButton):
     def __init__(self, **kwargs):
         super(RightsListButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
+
     def on_kv_post(self, widget):
         self._update_theme()
 
@@ -343,6 +397,12 @@ class RightsListButton(RootButton):
 class ExplorerButton(RootButton):
     def __init__(self, **kwargs):
         super(ExplorerButton, self).__init__(**kwargs)
+
+    def on_pos(self, *args):
+        self._update_theme()
+
+    def on_size(self, *args):
+        self._update_theme()
 
     def on_kv_post(self, widget):
         self._update_theme()
@@ -387,7 +447,13 @@ class TitleButton(RootButton):
         self.root = parent
         super(TitleButton, self).__init__(**kwargs)
 
+    def on_pos(self, *args):
+        self._update_theme()
+
     def on_size(self, *args):
+        self._update_theme()
+
+    def on_kv_post(self, widget):
         self._update_theme()
 
     def _update_theme(self):

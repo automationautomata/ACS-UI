@@ -120,18 +120,26 @@ class SkudApiRequests():
 
     def add_record(self, table: str, values: dict) -> bool:
         data = self.fmt({"values": values})
+        print(data)
+        return
         return self.request("post", data, f"/ui/{table}")
 
     def edit_record(self, table: str, id: Any, new_values: dict):
         data = self.fmt({"key": id, "values": new_values})
+        print(data)
+        return
         return self.request("post", data, f"/ui/{table}")
 
     def delete_record(self, table: str, id: Any):
         data = self.fmt({"key": id})
+        print(data)
+        return
         return self.request("delete", data, f"/ui/{table}")
 
     def find_record(self, table: str, values: dict) -> dict:
-        pass
+        data = self.fmt({"values": values})
+        print(data)
+        return
 
     def authentication(self, key: int) -> tuple[bool, str]:
         data = json.dumps({"key": key, "id": self.id})
