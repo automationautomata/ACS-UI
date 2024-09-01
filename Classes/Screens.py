@@ -38,18 +38,18 @@ class MainScreen(Screen):
         Window.clearcolor = app.themes[app.current_theme]['Base'][0]
         self.ids.entities_deleted_records._update()
         self.ids.access_rules_deleted_records._update()
-        self.ids.theme_button._update()
-        self.ids.domain_button._update()
-        self.ids.add_record_button._update()
-        self.ids.edit_record_button._update()
-        self.ids.delete_record_button._update()
-        self.ids.find_button._update()
-        self.ids.cards_list_button._update()
-        self.ids.rooms_list_button._update()
-        self.ids.rights_list_button._update()
-        self.ids.go_entites_screen._update()
-        self.ids.go_access_rules_screen._update()
-        self.ids.go_logs_screen._update()
+        self.ids.theme_button._update_theme()
+        self.ids.domain_button._update_theme()
+        self.ids.add_record_button._update_theme()
+        self.ids.edit_record_button._update_theme()
+        self.ids.delete_record_button._update_theme()
+        self.ids.find_button._update_theme()
+        self.ids.cards_list_button._update_theme()
+        self.ids.rooms_list_button._update_theme()
+        self.ids.rights_list_button._update_theme()
+        self.ids.go_entites_screen._update_theme()
+        self.ids.go_access_rules_screen._update_theme()
+        self.ids.go_logs_screen._update_theme()
         self.ids.footer._update()
         self.ids.entities_header._update()
         self.ids.entities_table._update()
@@ -64,7 +64,6 @@ class RulesScreen(Screen):
 
 class LogsScreen(Screen):
     pass
-
 
 class Footer(Widget):
     def on_size(self, *args):

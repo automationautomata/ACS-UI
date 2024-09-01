@@ -9,21 +9,21 @@
         size: (Window.width / 3 - 2, 50)
         pos: (0, Window.height - 50)
         text: "Entities"
-        on_press: screen_manager.current = "entities"
+        on_press_event: screen_manager.current = "entities"
 
     ExplorerButton:
         id: go_access_rules_screen
         size: (Window.width / 3 - 2, 50)
         pos: (Window.width / 3 + 1, Window.height - 50)
         text: 'Access rules'
-        on_press: screen_manager.current = "rules"
+        on_press_event: screen_manager.current = "rules"
 
     ExplorerButton:
         id: go_logs_screen
         size: (Window.width / 3 - 2, 50)
         pos: (Window.width * 2 / 3 + 2, Window.height - 50)
         text: 'Logs'
-        on_press: screen_manager.current = "logs"
+        on_press_event: screen_manager.current = "logs"
 
     ScreenManager:
         id: screen_manager
@@ -167,40 +167,40 @@
             id: theme_button
             pos: (Window.width - 30, 0)
             size: (30, footer.height)
-            on_press: self.switch_theme(root)
+            on_press_event: self.switch_theme(root)
 
         DomainButton:
             id: domain_button
             pos: (root.ids.theme_button.x - 95, 0)
             size: (90, footer.height)
-            on_press: Factory.DomainWindow().open_win()
+            on_press_event: Factory.DomainWindow().open_win()
 
         FindButton:
             id: find_button
             pos: (root.ids.domain_button.x - 105, 0)
             size: (100, footer.height)
-            on_press: Factory.FindWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view' if root.ids.screen_manager.current == 'rules' else 'logs')
+            on_press_event: Factory.FindWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view' if root.ids.screen_manager.current == 'rules' else 'logs')
 
         AddRecordButton:
             id: add_record_button
             pos: (0, 0)
             size: (75, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.AddRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
+            on_press_event: Factory.AddRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         EditRecordButton:
             id: edit_record_button      
             pos: (root.ids.add_record_button.right + 5, 0)
             size: (75, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.EditRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
+            on_press_event: Factory.EditRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (root.ids.edit_record_button.right + 5, 0)
             size: (100, footer.height)
             disabled: root.ids.screen_manager.current == 'logs'
-            on_press: Factory.DeleteRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
+            on_press_event: Factory.DeleteRecordWindow().open_win('entities_view' if root.ids.screen_manager.current == 'entities' else 'access_rules_view')
 
         CardsListButton:
             id: cards_list_button

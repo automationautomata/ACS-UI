@@ -45,21 +45,21 @@
     size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.CardsListWindow().open_win()
+    on_press_event: Factory.CardsListWindow().open_win()
 
 <RoomsListButton>:
     text: 'Rooms'
     size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.RoomsListWindow().open_win()
+    on_press_event: Factory.RoomsListWindow().open_win()
 
 <RightsListButton>:
     text: 'Rights'
     size_hint: (None, None)
     background_normal: ''
     background_disabled_normal: ''
-    on_press: Factory.RightsListWindow().open_win()
+    on_press_event: Factory.RightsListWindow().open_win()
 
 <ExplorerButton>:
     size_hint: (None, None)
@@ -206,25 +206,25 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('cards')
+            on_press_event: Factory.AddRecordWindow().open_win('cards')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('cards')
+            on_press_event: Factory.EditRecordWindow().open_win('cards')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('cards')
+            on_press_event: Factory.DeleteRecordWindow().open_win('cards')
 
         FindButton:
             id: find_button
             pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('cards')
+            on_press_event: Factory.FindWindow().open_win('cards')
 
 <RoomsListWindow>:
     size_hint: (None, None)
@@ -294,25 +294,25 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('rooms')
+            on_press_event: Factory.AddRecordWindow().open_win('rooms')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('rooms')
+            on_press_event: Factory.EditRecordWindow().open_win('rooms')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('rooms')
+            on_press_event: Factory.DeleteRecordWindow().open_win('rooms')
 
         FindButton:
             id: find_button
             pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('rooms')
+            on_press_event: Factory.FindWindow().open_win('rooms')
 
 <RightsListWindow>:
     size_hint: (None, None)
@@ -382,23 +382,23 @@
             id: add_record_button
             pos: (0, 330)
             size: (210, 30)
-            on_press: Factory.AddRecordWindow().open_win('rights')
+            on_press_event: Factory.AddRecordWindow().open_win('rights')
 
         EditRecordButton:
             id: edit_record_button
             pos: (0, 295)
             size: (210, 30)
-            on_press: Factory.EditRecordWindow().open_win('rights')
+            on_press_event: Factory.EditRecordWindow().open_win('rights')
 
         DeleteRecordButton:
             id: delete_record_button
             pos: (0, 260)
             size: (210, 30)
-            on_press: Factory.DeleteRecordWindow().open_win('rights')
+            on_press_event: Factory.DeleteRecordWindow().open_win('rights')
 
         FindButton:
             id: find_button
             pos: (0, 225)
             size: (210, 30)
-            on_press: Factory.FindWindow().open_win('rights')
+            on_press_event: Factory.FindWindow().open_win('rights')
 

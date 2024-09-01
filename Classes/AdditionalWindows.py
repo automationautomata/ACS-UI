@@ -277,8 +277,6 @@ class AddRecordWindow(Popup):
             for right in list_of_right:
                 btn = TipButton(text=right['name'],
                     tip_text=right['name'],
-                    background_normal='',
-                    background_color=app.themes[app.current_theme]['Additionally'][0],
                     size_hint_y=None,
                     height=35,
                     text_size=(100, 35),
@@ -322,10 +320,11 @@ class AddRecordWindow(Popup):
 
         # Запрос: список всех комнат из бд
         list_of_room = app.requsts_controller.get_table(table='room', start=-1)['data']
+        # list_of_room = [{'name': 'Right 1'}, {'name': 'Right 4aaaaaaaaaaaaaaaaaaaaaaaaa'}]
 
         if len(list_of_room) > 0:
             for room in list_of_room:
-                btn = TipButton(text=room['name'],
+                button = btn.TipButton(text=room['name'],
                     tip_text=room['name'],
                     background_normal='',
                     background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -337,8 +336,8 @@ class AddRecordWindow(Popup):
                     shorten=True,
                     shorten_from='right',
                     split_str='')
-                btn.bind(on_release=lambda btn: room_dropdown.select(btn.text))
-                room_dropdown.add_widget(btn)
+                button.bind(on_release=lambda button: room_dropdown.select(button.text))
+                room_dropdown.add_widget(button)
         self._result['room_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -359,7 +358,7 @@ class AddRecordWindow(Popup):
 
         if len(list_of_right) > 0:
             for right in list_of_right:
-                btn = TipButton(text=right['name'],
+                button = btn.TipButton(text=right['name'],
                     tip_text=right['name'],
                     background_normal='',
                     background_color=app.themes[app.current_theme]['Additionally'][0],
@@ -371,8 +370,8 @@ class AddRecordWindow(Popup):
                     shorten=True,
                     shorten_from='right',
                     split_str='')
-                btn.bind(on_release=lambda btn: right_dropdown.select(btn.text))
-                right_dropdown.add_widget(btn)
+                button.bind(on_release=lambda btn: right_dropdown.select(button.text))
+                right_dropdown.add_widget(button)
         self._result['right_result'] = Button(text='Choose...',
             background_normal='',
             background_color=app.themes[app.current_theme]['Additionally'][0],
