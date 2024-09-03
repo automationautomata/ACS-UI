@@ -132,10 +132,18 @@ class Tooltip(Label):
             Rectangle(size=self.size, pos=self.pos)
 
 class TipButton(RootButton):
+    tooltip = None
     tip_text = StringProperty('')
-    def __init__(self, tip_text, **kwargs):
+
+    def __init__(self, visible_symb, **kwargs):
         super(TipButton, self).__init__(**kwargs)
-        self.tip_text = tip_text
+        self.tip_text = self.text
+        if len(self.text) > visible_symb:
+            self.text = self.text[:visible_symb] + '...'
+        self._update_theme()
+
+    def on_pos(self, *args):
+        self._update_theme()
 
     def on_kv_post(self, widget):
         self._update_theme()
@@ -148,15 +156,11 @@ class TipButton(RootButton):
         self._update()
 
     def on_enter(self):
-        if self.disabled:
-            return
         self._update(self.bg_hover_color)
         self.tooltip = Tooltip(text=self.tip_text)
         Window.add_widget(self.tooltip)
 
     def on_leave(self):
-        if self.disabled:
-            return
         self._update()
         Window.remove_widget(self.tooltip)
 
