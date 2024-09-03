@@ -86,9 +86,9 @@ class SkudApiRequests():
         return {'data': [], 'error': ''}
         # -----------------------------Для тестов-----------------------------
 
-        # data = {"start"       : start, 
+        # data = {"start"       : start,
         #         "sorting_rules"  : self.table_sorting_rules[table]}
-        #        "order_type"  : order_type, 
+        #        "order_type"  : order_type,
         #        "order_column": order_column}
         sorting_rules = self.table_sorting_rules[table]
         data = {"start"       : start, 

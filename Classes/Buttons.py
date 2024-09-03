@@ -470,6 +470,8 @@ class TitleButton(RootButton):
     def on_press_event(self):
         app.requsts_controller.switch_sorting_rules(table=self.root._table,
             column=self.root._data_keys[self.root._data_titles.index(self.text)])
+        for title in self.parent.children:
+            title._update()
 
     def pre_graphic_event(self):
         with self.canvas.before:
@@ -487,5 +489,3 @@ class TitleButton(RootButton):
                     Color(*app.themes[app.current_theme]['Text'])
                     Line(points=[self.x + self.width - 20, 17, self.x + self.width - 20, 35], width=1.3, cap='round')
                     Triangle(points=[self.x + self.width - 25, 17, self.x + self.width - 15, 17, self.x + self.width - 20, 12])
-                else:
-                    pass

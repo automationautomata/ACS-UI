@@ -46,10 +46,10 @@
 
                 _grid: entities_header_content
                 _rows: 1
-                _columns: 13
+                _columns: 14
 
-                _data_titles: ('Id', 'Card', 'Name (sid)', 'Type', 'Right', 'Right ID', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
-                _data_keys: ('id', 'card', 'sid', 'type', 'rightName', 'right', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
+                _data_titles: ('Id', 'Name (sid)', 'Type', 'Card id', 'Card number', 'Is sabotaged card', 'Date the card was added', 'Date the card was deleted', 'Right id', 'Name of right', 'Date the right was added', 'Date the right was deleted', 'Date the entity was added', 'Date the entity was deleted')
+                _data_keys: ('id', 'sid', 'type', 'card', 'cardNumber', 'isSabotagedCard', 'cardAddDate', 'cardDelDate', 'right', 'rightName', 'rightAddDate', 'rightDelDate', 'entityAddDate', 'entityDelDate')
                 _table: 'entities_view'
                 _root: root
 
@@ -72,7 +72,7 @@
                 _grid: entities_table_content
                 _header: root.ids.entities_header
                 _rows: 25
-                _columns: 13
+                _columns: 14
 
                 GridLayout:
                     id: entities_table_content
@@ -87,8 +87,7 @@
                     col_force_default: True
                     size_hint_x: None
                     width: self.minimum_width
-
-
+                
         RulesScreen:
             id: access_rules_screen
             name: 'rules'

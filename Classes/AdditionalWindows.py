@@ -72,8 +72,6 @@ class FindWindow(Popup):
             self.menu_link()
         elif self._entity == 'access_rules_view':
             self.menu_rule()
-        elif self._entity == 'logs':
-            self.menu_logs()
 
     def menu_card(self):
         self._result = {}
@@ -315,7 +313,7 @@ class FindWindow(Popup):
             pos=(45, self.height - 150),
             size_hint=(None, None),
             size=(175, 35))
-        self._result['entity_name_label'] = Label(text='Name (sid)',
+        self._result['entity_name_label'] = Label(text='sid',
             pos=(45, self.height - 175),
             size_hint=(None, None),
             size=(175, 15))
@@ -390,7 +388,6 @@ class FindWindow(Popup):
             size_hint=(None, None),
             size=(95, 35))
 
-
         self._result['card_id_label'] = Label(text='Card id',
             pos=(295, self.height - 100),
             size_hint=(None, None),
@@ -455,7 +452,6 @@ class FindWindow(Popup):
             size_hint=(None, None),
             size=(95, 35))
 
-
         self._result['right_id_label'] = Label(text='Right id',
             pos=(545, self.height - 100),
             size_hint=(None, None),
@@ -512,11 +508,6 @@ class FindWindow(Popup):
             pos=(637.5, self.height - 405),
             size_hint=(None, None),
             size=(95, 35))
-
-
-
-
-
 
         self._result['confirm_button'] = Button(text='Confirm',
             background_normal='',
@@ -719,9 +710,6 @@ class FindWindow(Popup):
 
         for el in self._result.values():
             self.ids.main_area.add_widget(el)
-
-    def menu_logs(self):
-        pass
 
     def confirm_dismiss(self, instance):
         res = {}
