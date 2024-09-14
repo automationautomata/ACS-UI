@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, Literal
 import requests as req
 from requests.auth import AuthBase
 
@@ -44,7 +44,7 @@ class SkudApiRequests():
                           "put"   : req.put,
                           "delete": req.delete }
 
-    def request(self, type: str, body: Any, path="", headers=None): #-> req.Response | None:
+    def request(self, type: Literal["get", "post", "put", "update"], body: Any, path="", headers=None): #-> req.Response | None:
         try:
             response = self.requests[type](self.url+path, data=body, auth=self.token_auth, headers=headers)
             if response.status_code == 200:
